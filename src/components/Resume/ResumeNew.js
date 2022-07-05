@@ -9,7 +9,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const resumeLink =
-  "https://khaledmabrouk.vercel.app/static/media/khaled.e937485a43445daa7a22.pdf";
+  "https://khaledmabrouk.vercel.app/static/media/khaled.c37fcf5460bc94ee838b.pdf";
 
 function ResumeNew() {
   const [width, setWidth] = useState(1200);
