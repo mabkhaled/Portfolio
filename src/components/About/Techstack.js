@@ -1,25 +1,13 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { CgCPlusPlus } from "react-icons/cg";
-import {
-  DiJavascript1,
-  DiReact,
-  DiNodejs,
-  DiMongodb,
-  DiPython,
-  DiGit,
-} from "react-icons/di";
-import {
-  SiPytorch,
-  SiFirebase,
-  SiNextdotjs,
-} from "react-icons/si";
+import { DiJavascript1, DiReact, DiNodejs, DiMongodb, DiPython, DiGit } from "react-icons/di";
+import { SiPytorch, SiFirebase, SiNextdotjs, SiDotnet, SiAmazonaws, SiAzuredevops, SiJenkins, SiDocker, SiKubernetes } from "react-icons/si";
 
 function Techstack() {
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
       <Col xs={4} md={2} className="tech-icons">
-        <CgCPlusPlus />
+        <SiDotnet /> {/* .NET Core */}
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <DiJavascript1 />
@@ -47,6 +35,21 @@ function Techstack() {
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <SiPytorch />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiAmazonaws /> {/* AWS Services */}
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiAzuredevops /> {/* Azure DevOps */}
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiDocker /> {/* Docker */}
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiKubernetes /> {/* Kubernetes */}
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiJenkins /> {/* Jenkins */}
       </Col>
     </Row>
   );

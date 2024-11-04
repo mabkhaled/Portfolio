@@ -10,8 +10,7 @@ function AboutCard() {
           <p style={{ textAlign: "justify" }}>
             Hi Everyone, I am <span className="purple">Khaled Mabrouk </span>
             from <span className="purple"> Ariana, Tunisia.</span>
-            <br />I am a student pursuing mobile software engineering in ESPRIT,
-            Ariana.
+            <br />I am a recent graduate in software engineering with a specialization in cloud architecture and full-stack development from TEK-UP University, Tunisia.
             <br />
             <br />
             Apart from coding, some other activities that I love to do!
