@@ -10,6 +10,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { createAvatar } from "./avatar.js";
+import { quests } from "./quests.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -240,6 +241,20 @@ function scrollScenes() {
         },
       },
     });
+
+    // While a project is on stage, the comms step aside (after finishing their line) so nothing covers it.
+    const stage = $(".quest-stage");
+    let stageVisible = false;
+    const updateAway = () => {
+      const away = stageVisible && !comms.classList.contains("is-talking");
+      if (away === comms.classList.contains("is-away")) return;
+      comms.classList.toggle("is-away", away);
+      gsap.to(avatar.state, { fade: away ? 0 : 1, duration: 0.5, ease: "power2.out", overwrite: true });
+    };
+    if (stage) {
+      new IntersectionObserver(([e]) => { stageVisible = e.intersectionRatio > 0.55; updateAway(); }, { threshold: [0, 0.55, 1] }).observe(stage);
+      new MutationObserver(updateAway).observe(comms, { attributes: true, attributeFilter: ["class"] });
+    }
   }
 
   gsap.timeline({ scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } })
@@ -275,36 +290,6 @@ function scrollScenes() {
     });
   });
 
-  // Projects: vertical scroll drives a horizontal pan on wide screens.
-  gsap.matchMedia().add("(min-width: 768px)", () => {
-    const sec = $("#projects");
-    const track = $("#missionsTrack");
-    const dist = () => Math.max(0, track.scrollWidth - sec.clientWidth);
-    const pan = gsap.to(track, {
-      x: () => -dist(),
-      ease: "none",
-      scrollTrigger: {
-        trigger: sec,
-        start: "top top",
-        end: () => "+=" + dist(),
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
-    });
-    $$(".mission", track).forEach((card) =>
-      gsap.from(card, {
-        rotateY: -24,
-        scale: 0.9,
-        opacity: 0.25,
-        transformOrigin: "0% 50%",
-        ease: "none",
-        scrollTrigger: { trigger: card, containerAnimation: pan, start: "left 100%", end: "left 45%", scrub: true },
-      })
-    );
-  });
-
   // Loadout slots assemble in a staggered wave.
   gsap.from(".slot", {
     y: 60,
@@ -331,7 +316,7 @@ function scrollScenes() {
 /* ---------- Comms: one line per section, typed like game dialogue ---------- */
 const LINES = {
   stats: "These numbers come from production, not from slides.",
-  projects: "Side quests. Things I build when nobody is paying me to.",
+  projects: "Two of these are live. Go on, launch one.",
   loadout: "My loadout. Cloud first, then whatever the mission needs.",
   achievements: "Certified on AWS and Azure. More unlocking soon.",
   contact: "Your move, player two.",
@@ -401,5 +386,6 @@ function interactions() {
 
 if (!reduce) startDust();
 interactions();
+quests({ gsap, reduce, fine });
 scrollScenes();
 boot().then(() => ScrollTrigger.refresh());

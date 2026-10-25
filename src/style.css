@@ -294,64 +294,239 @@ html.gl-on .figure-img { visibility: hidden; }
 }
 .stat-label { color: var(--muted); max-width: 24ch; }
 
-/* Missions */
-.missions { position: relative; overflow: hidden; }
-.missions-track {
+/* Projects: quest select. A tab strip picks the quest, the stage shows it. */
+.quests-head { display: grid; gap: 12px; margin-bottom: clamp(24px, 2.4vw, 30px); }
+.quest-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.quest-tab {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(20px, 2.4vw, 40px);
-  width: max-content;
-  min-height: 100dvh;
-  padding: 120px var(--gutter) 80px;
-  perspective: 1600px;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 14px;
+  text-align: left;
+  color: var(--muted);
+  background: rgba(8, 20, 25, 0.6);
+  border: 1px solid var(--line);
+  border-radius: var(--cut-sm) 0 var(--cut-sm) 0;
+  cursor: pointer;
+  font: inherit;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background-color 0.3s var(--ease);
 }
-.mission-intro { width: min(420px, 34vw); flex-shrink: 0; display: grid; gap: 22px; padding-right: 3vw; }
-.missions-arrow { font-size: 2rem; color: var(--accent); }
-.mission {
-  flex-shrink: 0;
-  width: min(500px, 82vw);
-  min-height: min(560px, 74dvh);
-  padding: clamp(26px, 2.6vw, 40px);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  will-change: transform;
+@supports (corner-shape: bevel) { .quest-tab { corner-shape: bevel; } }
+.quest-tab > i { font-size: 1.5rem; flex-shrink: 0; transition: color 0.3s; }
+.quest-tab-text { display: grid; min-width: 0; }
+.quest-tab strong { color: var(--text); font-weight: 600; font-size: 0.98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quest-tab small { font: 0.7rem var(--f-mono); letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quest-tab:hover { border-color: var(--line-strong); color: var(--text); }
+.quest-tab[aria-selected="true"] {
+  color: var(--text);
+  border-color: rgba(79, 214, 228, 0.6);
+  background: linear-gradient(170deg, rgba(79, 214, 228, 0.16), rgba(8, 20, 25, 0.7));
 }
-.mission-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.mission-icon { font-size: 2.2rem; color: var(--accent); }
-.mission-date { font: 0.78rem var(--f-mono); letter-spacing: 0.06em; color: var(--muted); }
-.mission-org { font: 700 clamp(1.7rem, 2.4vw, 2.3rem)/1.1 var(--f-display); letter-spacing: -0.02em; }
-.mission-role { color: var(--accent); font-weight: 500; }
-.mission-points { display: grid; gap: 12px; color: #b9c8cc; line-height: 1.55; }
-.mission-points li { position: relative; padding-left: 22px; }
-.mission-points li::before {
-  content: "";
+.quest-tab[aria-selected="true"] > i { color: var(--accent); }
+.quest-live {
   position: absolute;
-  left: 2px;
-  top: 0.62em;
-  width: 6px;
-  height: 6px;
-  rotate: 45deg;
-  border: 1px solid var(--accent);
-}
-.mission-link {
+  top: -9px;
+  right: 10px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  align-self: flex-start;
-  font: 500 0.82rem var(--f-mono);
-  color: var(--accent);
-  letter-spacing: 0.04em;
+  gap: 5px;
+  padding: 2px 8px;
+  font: 600 0.6rem var(--f-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 999px;
 }
-.mission-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-.mission-link.is-private { color: var(--muted); }
-.mission-stack {
-  margin-top: auto;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  font: 0.75rem/1.7 var(--f-mono);
+.quest-live::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-ink); animation: blink 1.6s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0.2; } }
+/* Moving selection bar under the active tab. */
+.quest-marker {
+  position: absolute;
+  left: 0;
+  bottom: -9px;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent);
+  pointer-events: none;
+}
+
+.quest-stage { position: relative; }
+.quest-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(28px, 4vw, 60px);
+  align-items: center;
+  padding: clamp(16px, 1.7vw, 24px);
+  background: linear-gradient(170deg, rgba(14, 34, 42, 0.5), rgba(4, 12, 16, 0.75));
+  border: 1px solid var(--line);
+  border-radius: var(--cut) 0 var(--cut) 0;
+}
+@supports (corner-shape: bevel) { .quest-panel { corner-shape: bevel; } }
+.quest-panel[hidden] { display: none; }
+.quest-panel:focus-visible { outline-offset: 6px; }
+
+.quest-media { display: grid; gap: 14px; perspective: 1400px; min-width: 0; }
+.browser, .poster {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b1418;
+  border: 1px solid rgba(120, 210, 225, 0.22);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 60px -20px rgba(79, 214, 228, 0.35);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.browser { display: grid; grid-template-rows: 30px 1fr; aspect-ratio: auto; }
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  background: #0f1c21;
+  border-bottom: 1px solid rgba(120, 210, 225, 0.14);
+}
+.browser-bar span { width: 9px; height: 9px; border-radius: 50%; background: #2a3a40; }
+.browser-bar span:nth-child(1) { background: #ff6159; }
+.browser-bar span:nth-child(2) { background: #ffbd2e; }
+.browser-bar span:nth-child(3) { background: #28c941; }
+.browser-bar em {
+  margin-left: 12px;
+  padding: 3px 12px;
+  font: 0.68rem var(--f-mono);
+  font-style: normal;
   color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
 }
+.browser-view { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+.browser-view img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.7s var(--ease), transform 6s linear;
+}
+.browser-view img.is-active { opacity: 1; transform: scale(1); }
+.browser-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(500px circle at var(--gx, 30%) var(--gy, 0%), rgba(255, 255, 255, 0.12), transparent 50%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.browser:hover .browser-glare, .poster:hover .browser-glare { opacity: 1; }
+
+.shots { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.shot {
+  position: relative;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+.shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+.shot span {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 4px 6px;
+  font: 0.62rem var(--f-mono);
+  color: var(--text);
+  text-align: left;
+  background: linear-gradient(transparent, rgba(2, 7, 9, 0.9));
+}
+.shot:hover { opacity: 0.85; }
+.shot.is-active { opacity: 1; border-color: var(--accent); }
+.shot.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  animation: shot-timer var(--shot-ms, 4200ms) linear forwards;
+}
+.shots.is-paused .shot.is-active::after { animation-play-state: paused; }
+@keyframes shot-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Projects without a live demo get a poster instead of screenshots. */
+.poster {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  background:
+    radial-gradient(60% 70% at 50% 40%, rgba(79, 214, 228, 0.2), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(120, 210, 225, 0.14) 1px, transparent 0) 0 0 / 22px 22px,
+    #061015;
+}
+.poster-icon {
+  display: grid;
+  place-items: center;
+  width: clamp(76px, 9vw, 120px);
+  height: clamp(76px, 9vw, 120px);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  color: var(--accent);
+  border: 1px solid rgba(79, 214, 228, 0.5);
+  background: rgba(79, 214, 228, 0.08);
+  rotate: 45deg;
+  box-shadow: 0 0 50px -10px rgba(79, 214, 228, 0.6);
+}
+.poster-icon::before { display: inline-block; rotate: -45deg; }
+.poster-name {
+  margin-top: 14px;
+  font: 800 clamp(1.8rem, 3.6vw, 3.4rem)/1 var(--f-display);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--bg);
+  -webkit-text-stroke: 2px var(--text);
+  paint-order: stroke fill;
+}
+.poster-flow { display: flex; align-items: center; gap: 10px; font: 0.8rem var(--f-mono); color: var(--accent); letter-spacing: 0.08em; }
+
+.quest-info { display: grid; gap: 16px; align-content: center; min-width: 0; }
+.quest-kicker { font: 0.74rem var(--f-mono); letter-spacing: 0.1em; color: var(--accent); }
+.quest-title { font: 800 clamp(2.2rem, 4vw, 3.6rem)/1 var(--f-display); letter-spacing: -0.03em; }
+.quest-pitch { color: #b9c8cc; font-size: 1.05rem; line-height: 1.6; }
+.quest-perks { display: grid; gap: 10px; }
+.quest-perks li { display: flex; align-items: center; gap: 12px; font-size: 0.97rem; }
+.quest-perks i {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  color: var(--accent);
+  background: rgba(79, 214, 228, 0.08);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+}
+.quest-stack { font: 0.74rem/1.7 var(--f-mono); color: var(--muted); padding-top: 14px; border-top: 1px solid var(--line); }
+.quest-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 4px; }
+.quest-private { display: inline-flex; align-items: center; gap: 8px; font: 0.8rem var(--f-mono); color: var(--muted); }
 
 /* Loadout */
 .loadout .h2 { margin-bottom: clamp(40px, 5vw, 72px); }
@@ -474,8 +649,9 @@ html.gl-on .figure-img { visibility: hidden; }
 /* Comms: the avatar beams into this corner portrait after the hero. */
 .comms {
   position: fixed;
-  left: 20px;
+  right: 20px;
   bottom: 20px;
+  flex-direction: row-reverse;
   z-index: 45;
   display: flex;
   align-items: flex-end;
@@ -501,13 +677,15 @@ html.gl-on .figure-img { visibility: hidden; }
 @supports (corner-shape: bevel) { .comms-portrait::before { corner-shape: bevel; } }
 .comms-tag {
   position: absolute;
-  left: -5px;
+  right: -5px;
   top: -24px;
   font: 600 0.62rem var(--f-mono);
   letter-spacing: 0.24em;
   color: var(--accent);
 }
 .comms.is-on .comms-portrait { opacity: 1; }
+.comms { transition: opacity 0.5s var(--ease), translate 0.5s var(--ease); }
+.comms.is-away { opacity: 0; translate: 0 14px; }
 .comms-box {
   max-width: min(300px, 60vw);
   padding: 12px 16px 14px;
@@ -517,7 +695,7 @@ html.gl-on .figure-img { visibility: hidden; }
   border: 1px solid var(--line-strong);
   border-radius: 10px 0 10px 0;
   opacity: 0;
-  translate: -8px 0;
+  translate: 8px 0;
   transition: opacity 0.4s var(--ease), translate 0.4s var(--ease);
 }
 @supports (corner-shape: bevel) { .comms-box { corner-shape: bevel; } }
@@ -538,6 +716,8 @@ html.gl-on .figure-img { visibility: hidden; }
 
 /* Tablet */
 @media (max-width: 1024px) {
+  .quest-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .quest-panel { grid-template-columns: 1fr; }
   .bento { grid-template-columns: 1fr 1fr; }
   .slot-xl, .slot-wide { grid-column: span 2; grid-row: auto; }
   .slot-tall { grid-row: auto; }
@@ -547,18 +727,19 @@ html.gl-on .figure-img { visibility: hidden; }
 
 /* Mobile */
 @media (max-width: 767px) {
+  .quest-list { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 12px 2px 14px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
+  .quest-tab { flex: 0 0 auto; scroll-snap-align: start; }
+  .quest-marker { display: none; }
+  .shots { grid-template-columns: repeat(5, 30%); overflow-x: auto; }
+  .quest-panel { padding: 16px; }
   .nav-links { display: none; }
   .figure { top: auto; bottom: -4dvh; left: 50%; height: 60dvh; }
-  .comms { left: 12px; bottom: 12px; }
+  .comms { right: 12px; bottom: 12px; }
   .comms-portrait { width: 76px; height: 76px; }
   .comms-line { font-size: 0.88rem; }
   .hero-copy { top: 96px; translate: none; width: auto; right: var(--gutter); gap: 18px; }
   .hero-sub { max-width: 30ch; }
   .hero-hud { display: none; }
-  .missions-track { display: grid; width: auto; min-height: 0; padding: 96px var(--gutter); gap: 16px; }
-  .mission-intro { width: auto; padding: 0 0 16px; }
-  .missions-arrow { display: none; }
-  .mission { width: auto; min-height: 0; }
   .stats-list { gap: 40px 20px; }
   .bento { grid-template-columns: 1fr; }
   .slot-xl, .slot-wide { grid-column: auto; }
@@ -572,12 +753,14 @@ html.gl-on .figure-img { visibility: hidden; }
 
 /* Reduced motion: everything static and reachable */
 @media (prefers-reduced-motion: reduce) {
+  .quest-live::before, .shot.is-active::after { animation: none; }
+  .browser-view img { transition: none; }
   .boot { display: none; }
   .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
   .marquee-group[aria-hidden] { display: none; }
   .hud-live::before { animation: none; }
-  .missions-track { display: grid; width: auto; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-  .mission-intro { width: auto; }
-  .missions-arrow { display: none; }
-  .mission { width: auto; }
 }
+
+/* The quest select should fit one screen after "See projects". */
+.quests.section { padding-top: clamp(76px, 6vw, 92px); }
+.quests .h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); }

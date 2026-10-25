@@ -46,6 +46,7 @@ uniform sampler2D u_depth;
 uniform vec2 u_light;
 uniform float u_hud;
 uniform float u_intro;
+uniform float u_fade;
 float depthAt(vec2 uv) { return texture2D(u_depth, uv).r; }
 
 void main() {
@@ -116,6 +117,7 @@ void main() {
 
   vec3 col = mix(CYAN * 1.2, c, reveal) + CYAN * beam * 1.5;
   float alpha = clamp(a * reveal + holoA * 0.9 + beam, 0.0, 1.0);
+  alpha *= u_fade;
   gl_FragColor = vec4(col * alpha, alpha);
 }
 `;
@@ -230,7 +232,7 @@ const lerp = (a, b, t) => a + (b - a) * t;
 
 /**
  * @param {{figureEl: Element, portraitEl: Element, src: string, depthSrc: string, ticker: {add: Function}}} o
- * @returns {null | {state: {hud: number, intro: number}, ready: Promise<void>}}
+ * @returns {null | {state: {hud: number, intro: number, fade: number}, ready: Promise<void>}}
  */
 export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
   const canvas = document.createElement("canvas");
@@ -242,7 +244,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
   const COMMON = ["u_res", "u_dpr", "u_rect", "u_crop", "u_time", "u_trail", "u_tex"];
   let photo, dust;
   try {
-    photo = program(gl, PHOTO_VERT, PHOTO_FRAG, [...COMMON, "u_depth", "u_light", "u_hud", "u_intro"]);
+    photo = program(gl, PHOTO_VERT, PHOTO_FRAG, [...COMMON, "u_depth", "u_light", "u_hud", "u_intro", "u_fade"]);
     dust = program(gl, DUST_VERT, DUST_FRAG, [...COMMON, "u_size"]);
   } catch (err) {
     console.warn("avatar shader failed, keeping the still image", err);
@@ -261,7 +263,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
-  const state = { hud: 0, intro: 0 };
+  const state = { hud: 0, intro: 0, fade: 1 };
   const pointer = { x: innerWidth * 0.75, y: innerHeight * 0.35, t: -1e9 };
   const light = { x: 0.62, y: 0.2 };
   const trail = [];
@@ -341,7 +343,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
 
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
-    if (rect[1] > innerHeight || rect[1] + rect[3] < 0) return; // off screen
+    if (rect[1] > innerHeight || rect[1] + rect[3] < 0 || state.fade < 0.01) return; // off screen or faded out
 
     // Cursor light, in image coordinates. Idle: it swings around him like a slow rim light.
     const idle = performance.now() - pointer.t > 4000;
@@ -374,6 +376,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
     gl.uniform2f(photo.U.u_light, light.x, light.y);
     gl.uniform1f(photo.U.u_hud, h);
     gl.uniform1f(photo.U.u_intro, state.intro);
+    gl.uniform1f(photo.U.u_fade, state.fade);
     gl.bindBuffer(gl.ARRAY_BUFFER, quad);
     gl.enableVertexAttribArray(aPos);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);

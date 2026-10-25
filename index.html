@@ -54,7 +54,7 @@
         </h1>
         <p class="hero-sub">Backend and cloud engineer. I build real-time systems, AI products and the cloud they run on.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#contact">Let's talk <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <a class="btn btn-primary" href="#projects">See projects <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
           <a class="btn btn-ghost" href="/media/Khaled_Mabrouk_CV.pdf" download>Download CV <i class="ph ph-download-simple" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -82,89 +82,215 @@
       </div>
     </section>
 
-    <!-- PROJECTS: horizontal pan -->
-    <section class="missions" id="projects" aria-labelledby="projectsTitle">
-      <div class="missions-track" id="missionsTrack">
-        <div class="mission-intro">
+    <!-- PROJECTS: quest select (tabs + showcase stage) -->
+    <section class="quests section" id="projects" aria-labelledby="projectsTitle">
+      <div class="wrap">
+        <div class="quests-head">
           <h2 class="h2 reveal" id="projectsTitle">Side quests</h2>
-          <p class="body reveal">What I build on my own time: AI bots, mobile apps and learning tools.</p>
-          <i class="ph ph-arrow-right missions-arrow" aria-hidden="true"></i>
+          <p class="body reveal">Things I build on my own time. Two are live: pick one and press play.</p>
         </div>
 
-        <article class="mission panel">
-          <header class="mission-head">
-            <i class="ph ph-robot mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">2026</span>
-          </header>
-          <h3 class="mission-org">Candora</h3>
-          <p class="mission-role">AI job-application copilot</p>
-          <ul class="mission-points">
-            <li>Searches three job boards, scores every new offer against my profile and handles the applications.</li>
-            <li>Live dashboard with the bot's browser view, a run tracker, application history and a market radar.</li>
-            <li>Hands the browser back to a human only when a site asks for a captcha, then pings the phone.</li>
-          </ul>
-          <p class="mission-stack">Node.js / Playwright / SQLite / Better Auth / IMAP / GitHub Codespaces</p>
-          <span class="mission-link is-private"><i class="ph ph-lock-simple" aria-hidden="true"></i> Private repo</span>
-        </article>
+        <div class="quest-list" role="tablist" aria-label="Projects">
+          <button class="quest-tab" role="tab" id="tab-candora" aria-controls="panel-candora" aria-selected="true" tabindex="0">
+            <i class="ph ph-robot" aria-hidden="true"></i>
+            <span class="quest-tab-text"><strong>Candora</strong><small>AI job copilot</small></span>
+            <span class="quest-live">Live</span>
+          </button>
+          <button class="quest-tab" role="tab" id="tab-loftia" aria-controls="panel-loftia" aria-selected="false" tabindex="-1">
+            <i class="ph ph-house-line" aria-hidden="true"></i>
+            <span class="quest-tab-text"><strong>Loftia</strong><small>Themed stays</small></span>
+            <span class="quest-live">Live</span>
+          </button>
+          <button class="quest-tab" role="tab" id="tab-appbot" aria-controls="panel-appbot" aria-selected="false" tabindex="-1">
+            <i class="ph ph-telegram-logo" aria-hidden="true"></i>
+            <span class="quest-tab-text"><strong>App Generator</strong><small>Chat to APK</small></span>
+          </button>
+          <button class="quest-tab" role="tab" id="tab-social" aria-controls="panel-social" aria-selected="false" tabindex="-1">
+            <i class="ph ph-hand-heart" aria-hidden="true"></i>
+            <span class="quest-tab-text"><strong>AI for Good</strong><small>NLP prevention</small></span>
+          </button>
+          <button class="quest-tab" role="tab" id="tab-baladiyati" aria-controls="panel-baladiyati" aria-selected="false" tabindex="-1">
+            <i class="ph ph-buildings" aria-hidden="true"></i>
+            <span class="quest-tab-text"><strong>Baladiyati</strong><small>Citizen app</small></span>
+          </button>
+          <button class="quest-tab" role="tab" id="tab-learnify" aria-controls="panel-learnify" aria-selected="false" tabindex="-1">
+            <i class="ph ph-books" aria-hidden="true"></i>
+            <span class="quest-tab-text"><strong>Learnify</strong><small>E-learning</small></span>
+          </button>
+          <span class="quest-marker" aria-hidden="true"></span>
+        </div>
 
-        <article class="mission panel">
-          <header class="mission-head">
-            <i class="ph ph-hand-heart mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">NLP research</span>
-          </header>
-          <h3 class="mission-org">AI for Social Good</h3>
-          <p class="mission-role">Language models for suicide prevention</p>
-          <ul class="mission-points">
-            <li>Detects suicide-related posts and signs of suicidal ideation in online text.</li>
-            <li>Built to flag at-risk messages early so someone can reach out in time.</li>
-          </ul>
-          <p class="mission-stack">Python / NLP / Machine learning</p>
-        </article>
+        <div class="quest-stage">
+          <article class="quest-panel" role="tabpanel" id="panel-candora" aria-labelledby="tab-candora" tabindex="0">
+            <div class="quest-media">
+              <div class="browser" data-tilt>
+                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><em>candora-demo.vercel.app</em></div>
+                <div class="browser-view">
+                  <img class="is-active" src="/media/projects/candora-landing.webp" width="1600" height="1000" loading="lazy" alt="Candora landing page with the headline It applies while you sleep">
+                  <img src="/media/projects/candora-run.webp" width="1600" height="1000" loading="lazy" alt="Candora live dashboard while the bot fills an application form">
+                  <img src="/media/projects/candora-home.webp" width="1600" height="1000" loading="lazy" alt="Candora home screen with daily applications and job boards">
+                  <img src="/media/projects/candora-radar.webp" width="1600" height="1000" loading="lazy" alt="Candora market radar comparing skills in demand with the profile">
+                  <img src="/media/projects/candora-apps.webp" width="1600" height="1000" loading="lazy" alt="Candora applications list with follow-up status for each one">
+                </div>
+                <span class="browser-glare" aria-hidden="true"></span>
+              </div>
+              <div class="shots" role="group" aria-label="Candora screens">
+                <button class="shot is-active" type="button" aria-label="Show landing page"><img src="/media/projects/candora-landing.webp" alt="" width="160" height="100" loading="lazy"><span>Landing</span></button>
+                <button class="shot" type="button" aria-label="Show live run"><img src="/media/projects/candora-run.webp" alt="" width="160" height="100" loading="lazy"><span>Live run</span></button>
+                <button class="shot" type="button" aria-label="Show home screen"><img src="/media/projects/candora-home.webp" alt="" width="160" height="100" loading="lazy"><span>Home</span></button>
+                <button class="shot" type="button" aria-label="Show market radar"><img src="/media/projects/candora-radar.webp" alt="" width="160" height="100" loading="lazy"><span>Radar</span></button>
+                <button class="shot" type="button" aria-label="Show applications"><img src="/media/projects/candora-apps.webp" alt="" width="160" height="100" loading="lazy"><span>Applications</span></button>
+              </div>
+            </div>
+            <div class="quest-info">
+              <p class="quest-kicker">AI job-application copilot / 2026</p>
+              <h3 class="quest-title">Candora</h3>
+              <p class="quest-pitch">It reads every new job offer, scores it against your profile and applies through a real browser. You only step in when a site asks for a human.</p>
+              <ul class="quest-perks">
+                <li><i class="ph ph-magnifying-glass" aria-hidden="true"></i>Scans three job boards and scores every offer</li>
+                <li><i class="ph ph-browser" aria-hidden="true"></i>Applies through a real Chrome, with daily limits</li>
+                <li><i class="ph ph-monitor-play" aria-hidden="true"></i>Live dashboard that streams the bot's browser</li>
+                <li><i class="ph ph-device-mobile" aria-hidden="true"></i>Hands captchas to your phone, then carries on</li>
+                <li><i class="ph ph-chart-bar" aria-hidden="true"></i>Market radar: skills in demand against yours</li>
+              </ul>
+              <p class="quest-stack">Node.js / TypeScript / Playwright / SQLite / Better Auth / Three.js / GSAP</p>
+              <div class="quest-ctas">
+                <a class="btn btn-primary" href="https://candora-demo.vercel.app/welcome" target="_blank" rel="noopener">Launch live demo <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+                <span class="quest-private"><i class="ph ph-lock-simple" aria-hidden="true"></i> Private repo</span>
+              </div>
+            </div>
+          </article>
 
-        <article class="mission panel">
-          <header class="mission-head">
-            <i class="ph ph-telegram-logo mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">2021</span>
-          </header>
-          <h3 class="mission-org">App Generator Bot</h3>
-          <p class="mission-role">A chatbot that builds mobile apps</p>
-          <ul class="mission-points">
-            <li>Telegram bot that asks a few questions and generates a personalised Flutter APK.</li>
-            <li>Python bot driving a Flutter build pipeline from chat to installable app.</li>
-          </ul>
-          <p class="mission-stack">Python / Telegram Bot API / Flutter</p>
-          <a class="mission-link" href="https://github.com/mabkhaled/botflutter" target="_blank" rel="noopener">View code <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
-        </article>
+          <article class="quest-panel" role="tabpanel" id="panel-loftia" aria-labelledby="tab-loftia" tabindex="0" hidden>
+            <div class="quest-media">
+              <div class="browser" data-tilt>
+                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><em>loftia-demo.vercel.app</em></div>
+                <div class="browser-view">
+                  <img class="is-active" src="/media/projects/loftia-home.webp" width="1600" height="1000" loading="lazy" alt="Loftia home page with the headline Every stay has its own world">
+                  <img src="/media/projects/loftia-experiences.webp" width="1600" height="1000" loading="lazy" alt="Loftia themed universes compared side by side">
+                  <img src="/media/projects/loftia-listing.webp" width="1600" height="1000" loading="lazy" alt="Loftia listing page for the Loft Gamer Neon">
+                </div>
+                <span class="browser-glare" aria-hidden="true"></span>
+              </div>
+              <div class="shots" role="group" aria-label="Loftia screens">
+                <button class="shot is-active" type="button" aria-label="Show home page"><img src="/media/projects/loftia-home.webp" alt="" width="160" height="100" loading="lazy"><span>Home</span></button>
+                <button class="shot" type="button" aria-label="Show themed universes"><img src="/media/projects/loftia-experiences.webp" alt="" width="160" height="100" loading="lazy"><span>Universes</span></button>
+                <button class="shot" type="button" aria-label="Show a listing"><img src="/media/projects/loftia-listing.webp" alt="" width="160" height="100" loading="lazy"><span>Listing</span></button>
+              </div>
+            </div>
+            <div class="quest-info">
+              <p class="quest-kicker">Themed short-stay booking / 2026</p>
+              <h3 class="quest-title">Loftia</h3>
+              <p class="quest-pitch">Direct booking for a short-stay concierge where every home has a theme, from neon gaming lofts to quiet remote-work studios. Designed and shipped as a client demo in seven days.</p>
+              <ul class="quest-perks">
+                <li><i class="ph ph-squares-four" aria-hidden="true"></i>Six themed universes and twelve homes</li>
+                <li><i class="ph ph-calendar-check" aria-hidden="true"></i>Direct booking with no service fees</li>
+                <li><i class="ph ph-chat-circle-dots" aria-hidden="true"></i>Live concierge feed: check-ins and cleaning</li>
+                <li><i class="ph ph-rocket-launch" aria-hidden="true"></i>From brief to live demo in seven days</li>
+              </ul>
+              <p class="quest-stack">Next.js / React / TypeScript / Tailwind / shadcn/ui / Motion / Zustand</p>
+              <div class="quest-ctas">
+                <a class="btn btn-primary" href="https://loftia-demo.vercel.app/" target="_blank" rel="noopener">Launch live demo <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
 
-        <article class="mission panel">
-          <header class="mission-head">
-            <i class="ph ph-buildings mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">2022 - 2023</span>
-          </header>
-          <h3 class="mission-org">Baladiyati</h3>
-          <p class="mission-role">Your city in your pocket</p>
-          <ul class="mission-points">
-            <li>Mobile app that gives citizens the information they need about their neighbourhood.</li>
-            <li>Native iOS and Android clients on a shared Node.js backend.</li>
-          </ul>
-          <p class="mission-stack">Swift / Kotlin / Node.js</p>
-          <a class="mission-link" href="https://github.com/mabkhaled/baladiyati2" target="_blank" rel="noopener">View code <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
-        </article>
+          <article class="quest-panel" role="tabpanel" id="panel-appbot" aria-labelledby="tab-appbot" tabindex="0" hidden>
+            <div class="quest-media">
+              <div class="poster" data-tilt>
+                <i class="ph ph-telegram-logo poster-icon" aria-hidden="true"></i>
+                <span class="poster-name" aria-hidden="true">App Generator</span>
+                <span class="poster-flow" aria-hidden="true">Chat <i class="ph ph-arrow-right"></i> Build <i class="ph ph-arrow-right"></i> APK</span>
+                <span class="browser-glare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="quest-info">
+              <p class="quest-kicker">Chat-to-app builder / 2021</p>
+              <h3 class="quest-title">App Generator Bot</h3>
+              <p class="quest-pitch">A Telegram bot that asks a few questions, then builds a personalised Flutter app and sends it back as an installable APK.</p>
+              <ul class="quest-perks">
+                <li><i class="ph ph-chats" aria-hidden="true"></i>App configured entirely through chat</li>
+                <li><i class="ph ph-gear-six" aria-hidden="true"></i>Automated Flutter build pipeline</li>
+                <li><i class="ph ph-download-simple" aria-hidden="true"></i>APK delivered back in the conversation</li>
+              </ul>
+              <p class="quest-stack">Python / Telegram Bot API / Flutter</p>
+              <div class="quest-ctas">
+                <a class="btn btn-ghost" href="https://github.com/mabkhaled/botflutter" target="_blank" rel="noopener">View code <i class="ph ph-github-logo" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
 
-        <article class="mission panel">
-          <header class="mission-head">
-            <i class="ph ph-books mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">2022</span>
-          </header>
-          <h3 class="mission-org">Learnify</h3>
-          <p class="mission-role">E-learning platform</p>
-          <ul class="mission-points">
-            <li>Courses, tutoring and learning tools in one web platform.</li>
-            <li>Vue and Quasar front end on a Spring Boot API, with external services plugged in.</li>
-          </ul>
-          <p class="mission-stack">Vue.js / Quasar / Spring Boot / Java</p>
-          <a class="mission-link" href="https://github.com/mabkhaled/Learnify-frontend" target="_blank" rel="noopener">View code <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
-        </article>
+          <article class="quest-panel" role="tabpanel" id="panel-social" aria-labelledby="tab-social" tabindex="0" hidden>
+            <div class="quest-media">
+              <div class="poster" data-tilt>
+                <i class="ph ph-hand-heart poster-icon" aria-hidden="true"></i>
+                <span class="poster-name" aria-hidden="true">AI for Good</span>
+                <span class="poster-flow" aria-hidden="true">Text <i class="ph ph-arrow-right"></i> Signal <i class="ph ph-arrow-right"></i> Help</span>
+                <span class="browser-glare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="quest-info">
+              <p class="quest-kicker">NLP research</p>
+              <h3 class="quest-title">AI for Social Good</h3>
+              <p class="quest-pitch">Natural language processing that detects suicide-related posts and signs of suicidal ideation online, so help can reach people sooner.</p>
+              <ul class="quest-perks">
+                <li><i class="ph ph-text-aa" aria-hidden="true"></i>Text classification on social media posts</li>
+                <li><i class="ph ph-heartbeat" aria-hidden="true"></i>Built for early detection and prevention</li>
+              </ul>
+              <p class="quest-stack">Python / NLP / Machine learning</p>
+            </div>
+          </article>
+
+          <article class="quest-panel" role="tabpanel" id="panel-baladiyati" aria-labelledby="tab-baladiyati" tabindex="0" hidden>
+            <div class="quest-media">
+              <div class="poster" data-tilt>
+                <i class="ph ph-buildings poster-icon" aria-hidden="true"></i>
+                <span class="poster-name" aria-hidden="true">Baladiyati</span>
+                <span class="poster-flow" aria-hidden="true">iOS <i class="ph ph-plus"></i> Android <i class="ph ph-plus"></i> API</span>
+                <span class="browser-glare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="quest-info">
+              <p class="quest-kicker">Citizen app / 2022 - 2023</p>
+              <h3 class="quest-title">Baladiyati</h3>
+              <p class="quest-pitch">A citizen app that gives people the information they need about their neighbourhood, on iOS and Android.</p>
+              <ul class="quest-perks">
+                <li><i class="ph ph-apple-logo" aria-hidden="true"></i>Native iOS app in Swift</li>
+                <li><i class="ph ph-android-logo" aria-hidden="true"></i>Native Android app in Kotlin</li>
+                <li><i class="ph ph-hard-drives" aria-hidden="true"></i>Shared Node.js backend</li>
+              </ul>
+              <p class="quest-stack">Swift / Kotlin / Node.js</p>
+              <div class="quest-ctas">
+                <a class="btn btn-ghost" href="https://github.com/mabkhaled/baladiyati2" target="_blank" rel="noopener">View code <i class="ph ph-github-logo" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="quest-panel" role="tabpanel" id="panel-learnify" aria-labelledby="tab-learnify" tabindex="0" hidden>
+            <div class="quest-media">
+              <div class="poster" data-tilt>
+                <i class="ph ph-books poster-icon" aria-hidden="true"></i>
+                <span class="poster-name" aria-hidden="true">Learnify</span>
+                <span class="poster-flow" aria-hidden="true">Vue <i class="ph ph-arrow-right"></i> Spring Boot</span>
+                <span class="browser-glare" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="quest-info">
+              <p class="quest-kicker">E-learning platform / 2022</p>
+              <h3 class="quest-title">Learnify</h3>
+              <p class="quest-pitch">An e-learning platform that brings courses, tutoring and learning tools into one place.</p>
+              <ul class="quest-perks">
+                <li><i class="ph ph-browser" aria-hidden="true"></i>Vue and Quasar front end</li>
+                <li><i class="ph ph-plugs-connected" aria-hidden="true"></i>Spring Boot REST API</li>
+                <li><i class="ph ph-puzzle-piece" aria-hidden="true"></i>External services for content and tools</li>
+              </ul>
+              <p class="quest-stack">Vue.js / Quasar / Spring Boot / Java</p>
+              <div class="quest-ctas">
+                <a class="btn btn-ghost" href="https://github.com/mabkhaled/Learnify-frontend" target="_blank" rel="noopener">View code <i class="ph ph-github-logo" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
