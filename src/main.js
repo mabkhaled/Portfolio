@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { createAvatar } from "./avatar.js";
 import { quests } from "./quests.js";
+import { chat } from "./chat.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -246,7 +247,7 @@ function scrollScenes() {
     const stage = $(".quest-stage");
     let stageVisible = false;
     const updateAway = () => {
-      const away = stageVisible && !comms.classList.contains("is-talking");
+      const away = stageVisible && !comms.classList.contains("is-talking") && !comms.classList.contains("is-chatting");
       if (away === comms.classList.contains("is-away")) return;
       comms.classList.toggle("is-away", away);
       gsap.to(avatar.state, { fade: away ? 0 : 1, duration: 0.5, ease: "power2.out", overwrite: true });
@@ -328,6 +329,7 @@ function commsLines(comms) {
   let pending = "";
   const say = (text) => {
     // Section reached before he finished beaming in: speak once he lands.
+    if (comms.classList.contains("is-chatting")) return; // a real conversation beats the scripted lines
     if (!comms.classList.contains("is-on")) return void (pending = text);
     pending = "";
     clearInterval(typing);
@@ -387,5 +389,6 @@ function interactions() {
 if (!reduce) startDust();
 interactions();
 quests({ gsap, reduce, fine });
+chat({ gsap, reduce, avatar });
 scrollScenes();
 boot().then(() => ScrollTrigger.refresh());

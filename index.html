@@ -63,6 +63,7 @@
         <div><dt>Class</dt><dd>Cloud Architect</dd></div>
         <div><dt>Base</dt><dd>Tunis, remote</dd></div>
         <div><dt>Status</dt><dd class="hud-live">Open to missions</dd></div>
+        <div><dt>Comms</dt><dd><button class="hud-talk" type="button" data-chat-open><i class="ph ph-chat-circle-dots" aria-hidden="true"></i> Talk to my AI</button></dd></div>
       </dl>
     </section>
 
@@ -375,13 +376,40 @@
     </section>
   </main>
 
-  <aside class="comms" id="comms" aria-hidden="true">
-    <div class="comms-portrait" id="commsPortrait"><span class="comms-tag">KM</span></div>
-    <div class="comms-box">
+  <aside class="comms" id="comms">
+    <div class="comms-portrait" id="commsPortrait">
+      <button class="comms-talk" type="button" data-chat-open><i class="ph ph-chat-circle-dots" aria-hidden="true"></i> Ask me anything</button>
+    </div>
+    <div class="comms-box" aria-hidden="true">
       <span class="comms-name">Khaled // comms</span>
       <p class="comms-line" id="commsLine"></p>
     </div>
   </aside>
+
+  <!-- AI chat: answers come from api/chat.js (Gemini), as the AI version of Khaled. -->
+  <section class="chat" id="chat" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>
+    <header class="chat-head">
+      <span class="chat-dot" aria-hidden="true"></span>
+      <div>
+        <h2 class="chat-title" id="chatTitle">Khaled // AI comms</h2>
+        <p class="chat-sub">AI version of Khaled, trained on his CV and projects</p>
+      </div>
+      <button class="chat-close" type="button" id="chatClose" aria-label="Close chat"><i class="ph ph-x" aria-hidden="true"></i></button>
+    </header>
+    <div class="chat-log" id="chatLog" aria-live="polite"></div>
+    <div class="chat-chips" id="chatChips">
+      <button type="button" class="chat-chip">What do you build?</button>
+      <button type="button" class="chat-chip">Tell me about Candora</button>
+      <button type="button" class="chat-chip">Your experience?</button>
+      <button type="button" class="chat-chip">How can I contact you?</button>
+    </div>
+    <form class="chat-form" id="chatForm">
+      <label class="sr-only" for="chatInput">Your question</label>
+      <input id="chatInput" name="q" type="text" maxlength="600" autocomplete="off" placeholder="Ask about my work, skills, projects..." required>
+      <button class="chat-send" type="submit" aria-label="Send"><i class="ph ph-paper-plane-right" aria-hidden="true"></i></button>
+    </form>
+    <p class="chat-note">AI answers can be wrong. Please do not share personal information.</p>
+  </section>
 
   <footer class="footer wrap">
     <span>&copy; 2026 Khaled Mabrouk</span>

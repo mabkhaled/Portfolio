@@ -47,6 +47,7 @@ uniform vec2 u_light;
 uniform float u_hud;
 uniform float u_intro;
 uniform float u_fade;
+uniform float u_talk;
 float depthAt(vec2 uv) { return texture2D(u_depth, uv).r; }
 
 void main() {
@@ -86,10 +87,11 @@ void main() {
 
   // Energy pulses running through the cyan seams; the wrist hologram flickers.
   float cyanMask = smoothstep(0.05, 0.18, (base.g + base.b) * 0.5 - base.r) * smoothstep(0.32, 0.55, max(base.g, base.b));
-  float wave = pow(0.5 + 0.5 * sin(s.y * 28.0 - u_time * 2.8 + s.x * 7.0), 12.0);
+  // While he talks in the chat, the energy runs faster and brighter.
+  float wave = pow(0.5 + 0.5 * sin(s.y * 28.0 - u_time * (2.8 + u_talk * 5.0) + s.x * 7.0), 12.0);
   float holo = step(0.84, s.x) * step(0.66, s.y) * step(s.y, 0.82);
   float flick = mix(1.0, 0.75 + 0.35 * hash(floor(u_time * 13.0)), holo);
-  c += CYAN * cyanMask * (0.22 + 1.5 * wave) * flick * 0.75;
+  c += CYAN * cyanMask * (0.22 + 1.5 * wave) * flick * (0.75 + u_talk * 0.9);
 
   // Alpha: keep the character, let a little smoke breathe around him, dissolve the cut at the belt.
   float vign = (1.0 - smoothstep(0.12, 0.6, length((local - vec2(0.5, 0.4)) * vec2(1.0, 0.7))))
@@ -244,7 +246,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
   const COMMON = ["u_res", "u_dpr", "u_rect", "u_crop", "u_time", "u_trail", "u_tex"];
   let photo, dust;
   try {
-    photo = program(gl, PHOTO_VERT, PHOTO_FRAG, [...COMMON, "u_depth", "u_light", "u_hud", "u_intro", "u_fade"]);
+    photo = program(gl, PHOTO_VERT, PHOTO_FRAG, [...COMMON, "u_depth", "u_light", "u_hud", "u_intro", "u_fade", "u_talk"]);
     dust = program(gl, DUST_VERT, DUST_FRAG, [...COMMON, "u_size"]);
   } catch (err) {
     console.warn("avatar shader failed, keeping the still image", err);
@@ -263,7 +265,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
-  const state = { hud: 0, intro: 0, fade: 1 };
+  const state = { hud: 0, intro: 0, fade: 1, talk: 0 };
   const pointer = { x: innerWidth * 0.75, y: innerHeight * 0.35, t: -1e9 };
   const light = { x: 0.62, y: 0.2 };
   const trail = [];
@@ -377,6 +379,7 @@ export function createAvatar({ figureEl, portraitEl, src, depthSrc, ticker }) {
     gl.uniform1f(photo.U.u_hud, h);
     gl.uniform1f(photo.U.u_intro, state.intro);
     gl.uniform1f(photo.U.u_fade, state.fade);
+    gl.uniform1f(photo.U.u_talk, state.talk);
     gl.bindBuffer(gl.ARRAY_BUFFER, quad);
     gl.enableVertexAttribArray(aPos);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
