@@ -11,7 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { createAvatar } from "./avatar.js";
 import { quests } from "./quests.js";
-import { chat } from "./chat.js";
+import { chat, playLine } from "./chat.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -326,12 +326,14 @@ function commsLines(comms) {
   const out = $("#commsLine");
   let typing = 0;
   let hideTimer = 0;
-  let pending = "";
-  const say = (text) => {
+  let pending = null;
+  const say = (id) => {
+    const text = LINES[id];
     // Section reached before he finished beaming in: speak once he lands.
     if (comms.classList.contains("is-chatting")) return; // a real conversation beats the scripted lines
-    if (!comms.classList.contains("is-on")) return void (pending = text);
-    pending = "";
+    if (!comms.classList.contains("is-on")) return void (pending = id);
+    pending = null;
+    playLine(id); // his voice, for visitors who opened the chat with sound on
     clearInterval(typing);
     clearTimeout(hideTimer);
     comms.classList.add("is-talking");
@@ -345,12 +347,12 @@ function commsLines(comms) {
       }
     }, 26);
   };
-  Object.entries(LINES).forEach(([id, text]) =>
+  Object.keys(LINES).forEach((id) =>
     ScrollTrigger.create({
       trigger: "#" + id,
       start: "top 55%",
-      onEnter: () => say(text),
-      onEnterBack: () => say(text),
+      onEnter: () => say(id),
+      onEnterBack: () => say(id),
     })
   );
   say.flush = () => pending && say(pending);

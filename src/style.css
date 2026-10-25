@@ -737,8 +737,14 @@ html.gl-on .figure-img { visibility: hidden; }
 .chat-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); flex-shrink: 0; }
 .chat-title { font: 600 0.8rem var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
 .chat-sub { font-size: 0.78rem; color: var(--muted); }
-.chat-close { margin-left: auto; display: grid; place-items: center; width: 32px; height: 32px; font-size: 1rem; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
-.chat-close:hover { color: var(--text); border-color: var(--line-strong); }
+.chat-icon { display: grid; place-items: center; width: 32px; height: 32px; font-size: 1rem; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+#chatSound { margin-left: auto; }
+.chat-icon:hover { color: var(--text); border-color: var(--line-strong); }
+#chatSound[aria-pressed="true"] { color: var(--accent); }
+.chat-mic { display: grid; place-items: center; width: 44px; font-size: 1.15rem; color: var(--accent); background: rgba(79, 214, 228, 0.08); border: 1px solid var(--line-strong); border-radius: 10px; cursor: pointer; }
+.chat-mic[hidden] { display: none; }
+.chat-mic.is-listening { color: var(--accent-ink); background: var(--accent); animation: listen 1s ease-in-out infinite; }
+@keyframes listen { 50% { box-shadow: 0 0 0 6px rgba(79, 214, 228, 0.25); } }
 .chat-log { display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow-y: auto; overscroll-behavior: contain; min-height: 120px; }
 .msg { max-width: 88%; padding: 10px 13px; font-size: 0.93rem; line-height: 1.5; border-radius: 12px; overflow-wrap: anywhere; }
 .msg a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }

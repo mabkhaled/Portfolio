@@ -394,7 +394,8 @@
         <h2 class="chat-title" id="chatTitle">Khaled // AI comms</h2>
         <p class="chat-sub">AI version of Khaled, trained on his CV and projects</p>
       </div>
-      <button class="chat-close" type="button" id="chatClose" aria-label="Close chat"><i class="ph ph-x" aria-hidden="true"></i></button>
+      <button class="chat-icon" type="button" id="chatSound" aria-pressed="true" aria-label="Mute voice"><i class="ph ph-speaker-high" aria-hidden="true"></i></button>
+      <button class="chat-icon" type="button" id="chatClose" aria-label="Close chat"><i class="ph ph-x" aria-hidden="true"></i></button>
     </header>
     <div class="chat-log" id="chatLog" aria-live="polite"></div>
     <div class="chat-chips" id="chatChips">
@@ -406,6 +407,7 @@
     <form class="chat-form" id="chatForm">
       <label class="sr-only" for="chatInput">Your question</label>
       <input id="chatInput" name="q" type="text" maxlength="600" autocomplete="off" placeholder="Ask about my work, skills, projects..." required>
+      <button class="chat-mic" type="button" id="chatMic" aria-pressed="false" aria-label="Ask with your voice"><i class="ph ph-microphone" aria-hidden="true"></i></button>
       <button class="chat-send" type="submit" aria-label="Send"><i class="ph ph-paper-plane-right" aria-hidden="true"></i></button>
     </form>
     <p class="chat-note">AI answers can be wrong. Please do not share personal information.</p>
