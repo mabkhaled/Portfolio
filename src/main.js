@@ -250,7 +250,7 @@ function scrollScenes() {
       const away = stageVisible && !comms.classList.contains("is-talking") && !comms.classList.contains("is-chatting");
       if (away === comms.classList.contains("is-away")) return;
       comms.classList.toggle("is-away", away);
-      gsap.to(avatar.state, { fade: away ? 0 : 1, duration: 0.5, ease: "power2.out", overwrite: true });
+      gsap.to(avatar.state, { fade: away ? 0 : 1, duration: 0.5, ease: "power2.out", overwrite: "auto" }); // "auto": only fade tweens compete
     };
     if (stage) {
       new IntersectionObserver(([e]) => { stageVisible = e.intersectionRatio > 0.55; updateAway(); }, { threshold: [0, 0.55, 1] }).observe(stage);

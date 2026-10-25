@@ -2,10 +2,10 @@
 
 export const PROFILE = `
 IDENTITY
-- Khaled Mabrouk. Backend and Cloud Engineer, Cloud-Native Architect. Node.js / TypeScript, React and Flutter, GCP and AWS.
-- 2 years of production experience. AWS Certified Solutions Architect - Associate (SAA-C03).
+- Khaled Mabrouk. Full-Stack Engineer: Node.js / React / Flutter, cloud on GCP and AWS. 2 years of production experience.
+- AWS Certified Solutions Architect - Associate (SAA-C03).
 - Based in Tunis, Tunisia. Open to full remote work or relocation to the EU.
-- Languages: Arabic (native), French (B2), English (B2).
+- Languages: Arabic (native), French (advanced, B2), English (advanced, B2).
 
 CONTACT (share freely)
 - Email: khaledmabrouk714@gmail.com
@@ -13,50 +13,57 @@ CONTACT (share freely)
 - LinkedIn: https://www.linkedin.com/in/mabrouk-khaled/
 - GitHub: https://github.com/mabkhaled
 - Portfolio: https://khaledmabrouk.vercel.app
-- The CV can be downloaded from the portfolio ("Download CV" button).
+- The CV (in French) can be downloaded from the portfolio ("Download CV" button).
 
-PROFILE
-Backend and cloud engineer who designs and runs real-time systems in four sectors: energy and e-mobility (OCPP and MQTT charge points), EdTech (LLM), HealthTech (clinical AI) and assistive IoT. Covers the whole cycle from architecture to observability, always aiming for reliable services (99.9% availability), security by design and a controlled cloud bill.
+SUMMARY
+Full-stack engineer with 2 years of production experience on Node.js / TypeScript, React and Flutter, deployed on GCP and AWS. Experience on high-stakes applications in energy (EV charge points), EdTech (AI grading) and health (clinical prediction).
 
 SKILLS
-- Back-end and real time: Node.js / TypeScript (Express, Prisma), Spring Boot; versioned REST APIs, high-frequency WebSockets, OCPP 1.6J / 2.0.1 (EV charge points), MQTT (IoT telemetry), idempotent Stripe webhooks.
-- Architecture: microservices and serverless on GCP / AWS, event-driven (Pub/Sub, message queues), idempotency and retries, resilience (circuit breaker, backpressure), zero-downtime deploys, SLOs and distributed tracing.
-- Cloud and DevOps: GCP (Cloud Run, Cloud SQL, Pub/Sub, Secret Manager), AWS (Lambda, API Gateway, Cognito, DynamoDB), Docker, Kubernetes, Terraform, GitHub Actions / GitLab CI, FinOps (right-sizing, auto-scaling).
-- Security: OAuth2 / OIDC, JWT (rotation, refresh tokens), multi-tenant RBAC, least-privilege IAM, secrets management, TLS / WSS, API hardening (rate limiting, input validation, OWASP Top 10), GDPR by design (minimisation, encryption, minors' and health data).
-- Data: PostgreSQL (indexing, Prisma migrations), MySQL, MongoDB, Redis (cache, pub/sub), DynamoDB; hybrid SQL / NoSQL modelling, telemetry time series.
-- AI and LLM: multi-LLM orchestration (OpenAI, Anthropic, Mistral) with fallback and cost control, OCR to LLM pipelines, output quality evaluation, prompt engineering, NLP, Python, DTW.
-- Front-end and mobile: React, Angular, TypeScript; Flutter (Dart, Bloc, Clean Architecture), native Android (Kotlin).
+- Back-end: Node.js, TypeScript, Express, Prisma; REST API design, real-time WebSockets, hardware protocol integration (OCPP, MQTT), online payments (Stripe). One mission in Spring Boot (Java).
+- Front-end and mobile: React (TypeScript) for the web; Flutter (Dart, Bloc, Clean Architecture) for Android / iOS mobile.
+- Cloud: GCP (Cloud Run, Cloud SQL, Pub/Sub) and AWS (Lambda, API Gateway, Cognito, DynamoDB); microservices and serverless architecture; AWS Solutions Architect Associate certified.
+- DevOps: Docker, Kubernetes, CI/CD with GitHub Actions and GitLab CI, zero-downtime deployments, monitoring (SLOs, tracing, alerting), cloud cost optimisation.
+- Databases: PostgreSQL, MySQL, MongoDB, Redis (cache and pub/sub).
+- Artificial intelligence: LLM integration (OpenAI, Anthropic, Mistral), document processing pipelines (OCR to LLM), serving prediction models through an API (Python, scikit-learn), NLP.
+- Security: OAuth2 / JWT, role-based access control (RBAC), least-privilege IAM, GDPR compliance (minors' and health data).
+- Quality and methods: Clean Architecture, SOLID, TDD, code review, Agile / Scrum, requirements gathering and technical specifications.
 
 EXPERIENCE
-1) Backend and Cloud Lead (Responsable Backend & Cloud) - ZCE Group (Zero Carbon Emission), Grenoble, France, full remote. August 2025 to now.
-   Energy management: supervision and control of EV charge points, operations dashboard and back-office.
-   - Designed the full chain charge point -> cloud -> user: OCPP (WebSockets) and MQTT on the hardware side, Node.js / TypeScript back-end on GCP, React / Angular dashboard, Flutter (Bloc) mobile app. Charging session starts in under 1 second.
-   - Architected the GCP microservices (Cloud Run, Cloud SQL, Redis) and the critical APIs (authentication, telemetry, billing) with SLOs, distributed tracing and proactive alerting: 99.9% availability.
-   - Industrialised GitHub Actions CI/CD with zero-downtime deploys; cut the cloud bill by about 30% (Redis cache, auto-scaling, right-sizing).
-   - Led a firmware escalation with the charge point manufacturer: analysed frames, reproduced blocking defects, followed up until the fix.
-   - Set up code review and security by design (RBAC, least-privilege IAM); wrote technical specs and prioritised with business teams.
-   Stack: Node.js, TypeScript, Prisma, React, Angular, Flutter, GCP, Redis, PostgreSQL, OCPP, MQTT, WebSockets.
-2) Full-Stack and AI Engineer, EdTech - Pro-Corrector. Freelance, part-time alongside the main job, remote. June 2026 to now.
-   SaaS that grades scanned exam papers with AI for secondary-school teachers (B2B2C, France).
-   - Built the platform end to end: automatic reading and splitting of scanned papers, LLM-assisted grading, per-skill statistics for teachers.
-   - Node.js / TypeScript + PostgreSQL back-end, React front-end; multi-LLM orchestration (OpenAI, Anthropic, Mistral) with automatic fallback: reliable grading at a controlled cost per paper.
-   - Stripe billing (subscriptions, webhooks) and GDPR by design on minors' data.
-3) Full-Stack Mobile and Web Engineer, HealthTech AI - Maydena. Fixed-term contract, Nantes, France, remote. September 2024 to July 2025.
-   Medical platform with a clinical prediction engine, from design to production.
-   - Delivered the Android app (Kotlin), the Angular portal and the Spring Boot API of the clinical prediction engine.
-   - Secured the back-end with JWT and granular RBAC (patient / practitioner / admin); hybrid MongoDB + MySQL persistence suited to clinical workflows and health-data privacy.
-   - Deployed via GitLab CI/CD to Kubernetes: reproducible environments, releases without downtime.
-4) Academic project: Flutter and Serverless Backend Engineer, assistive IoT - Gewinner, final-year engineering project, Ariana, Tunisia. March to September 2024.
-   - Flutter app that controls a wheelchair by voice: DTW recognition robust to noise (40% fewer errors), real-time geolocation, embedded NLP chatbot.
-   - Serverless AWS back-end (Lambda, API Gateway, Cognito, DynamoDB): automatic scaling, pay-per-use cost.
+1) Backend and Cloud Engineer - client ZCE Group (Zero Carbon Emission), Grenoble, France, full remote. August 2025 to now. Agile / Scrum.
+   Project: supervision and operations platform for electric-vehicle charge points (real-time back-end, operations web dashboard, mobile app and back-office) for a publisher of energy management solutions. Charge points talk to the platform over OCPP (WebSockets) and report telemetry over MQTT; the platform drives charging sessions, tracks the fleet and bills consumption.
+   What I did:
+   - Built the Node.js / TypeScript back-end (Express, Prisma, PostgreSQL): authentication, charge point management, charging sessions, telemetry and billing APIs.
+   - Implemented the OCPP server over WebSockets: starting, tracking and stopping charging sessions, handling reconnections and charge point states.
+   - Set up MQTT telemetry ingestion (power, energy, state) and its storage for real-time monitoring.
+   - Built the operations dashboard in React (TypeScript): fleet status, live sessions, alerts.
+   - Built the Flutter (Bloc) mobile app screens: finding charge points, starting and following a charge, history.
+   - Took part in designing the GCP microservices (Cloud Run, Cloud SQL, Redis) with the tech lead.
+   - Set up GitHub Actions CI/CD with zero-downtime deployments, and monitoring: SLOs, distributed tracing, proactive alerts.
+   - Analysed a firmware escalation with the charge point manufacturer: read OCPP frames, reproduced the defects, validated the fix.
+   - Took part in feature definition: requirements, technical specs, code review, prioritisation with the business.
+   Results: charging sessions start in under 1 second; 99.9% platform availability; cloud bill cut by about 30% (Redis cache, auto-scaling).
+   Stack: Node.js, TypeScript, Express, Prisma, PostgreSQL, Redis, React, Flutter (Bloc), GCP (Cloud Run, Cloud SQL), GitHub Actions, OCPP, MQTT, WebSockets, Docker, Git, Scrum.
+2) Full-Stack and AI Developer - client Pro-Corrector (France). Freelance, part-time alongside the main job, remote. June 2026 to now.
+   Project: SaaS that grades scanned exam papers with AI for secondary-school teachers. The teacher uploads scanned papers; the platform splits them, grades them with LLMs against the marking scheme, then produces per-skill statistics. The data concerns minors and falls under GDPR.
+   What I did: designed and built the Node.js / TypeScript back-end (Express, Prisma, PostgreSQL) for classes, papers, marking schemes and a processing queue; built the grading pipeline (automatic splitting of scanned papers, LLM calls to OpenAI, Anthropic and Mistral with automatic fallback between providers); cost control per paper and logging of LLM calls; the React (TypeScript) front-end (uploads, teacher review and grade adjustment, per-skill dashboards); Stripe billing (subscriptions, webhooks, failed payments); GDPR compliance (data minimisation, encryption, retention, right to erasure); Docker and deployment on GCP.
+   Stack: Node.js, TypeScript, Express, Prisma, PostgreSQL, React, OpenAI / Anthropic / Mistral, Stripe, Docker, GCP, Git.
+3) Full-Stack Mobile and Web Developer - client Maydena, Nantes, France. Fixed-term contract (CDD), remote. September 2024 to July 2025. Agile / Scrum.
+   Project: AI-assisted clinical prediction platform: patient mobile app, practitioner portal and prediction engine. The patient enters data in the app; the practitioner sees a risk score from a prediction model, with the factors that explain it, and validates or adjusts the diagnosis.
+   What I did: helped model the clinical database (patients, consultations, history, results) and design the business modules; built the Spring Boot API (patients, consultations) and exposed the prediction engine through an inference API (Python, scikit-learn); returned the risk score with a confidence level and explanatory factors; built the patient mobile app and the practitioner portal; JWT authentication and role-based access (patient / practitioner / admin), encryption of sensitive data and access logging; monitored the model in production (accuracy, data drift) with a practitioner feedback loop for retraining; deployed through GitLab CI/CD to Kubernetes, including acceptance testing, bug fixing and releases.
+   Stack: Spring Boot (Java), Android (Kotlin), Angular, Python, scikit-learn, MongoDB, MySQL, JWT, Docker, GitLab CI, Kubernetes, Git, Scrum.
+4) Final-year engineering project: Flutter and Serverless Backend Engineer - Gewinner, Ariana, Tunisia. March to September 2024.
+   Project: mobile app to drive a wheelchair by voice for people with reduced mobility, with real-time geolocation and a conversational assistant. Recognition had to stay reliable in noisy places and work with limited connectivity.
+   What I did: Flutter (Bloc) app (driving interface, voice commands, map and trip history); voice command recognition with DTW (Dynamic Time Warping) and signal pre-processing against background noise; communication between the app and the wheelchair (movement commands, status feedback); serverless AWS back-end in Node.js (Lambda, API Gateway, Cognito auth, DynamoDB for profiles and history); embedded NLP chatbot; real-world tests with users.
+   Results: 40% fewer voice recognition errors in noisy environments; pay-per-use back-end thanks to serverless.
+   Stack: Flutter (Dart, Bloc), Node.js, AWS (Lambda, API Gateway, Cognito, DynamoDB), DTW, NLP, Git.
 
 EDUCATION
-- National Engineering Diploma in Computer Science (Software Engineering), TEK-UP, Tunisia, 2022-2024.
-- Bachelor in Electronics, Electrotechnics and Automation, ISSAT Sousse, 2018-2021.
+- 2024: National Engineering Diploma in Computer Science, Software Engineering - TEK-UP, Tunisia.
+- 2021: Bachelor in Electronics, Electrotechnics and Automation - ISSAT, Gafsa.
 
 CERTIFICATIONS AND DISTINCTIONS
-- AWS Solutions Architect Associate (SAA-C03), AWS Cloud Practitioner, Azure AZ-900, Azure AI-900.
-- Ibda3 laureate (Francophonie and ICESCO), DevOps Tunis member, registered with the Ordre des Ingenieurs Tunisiens (OIT), DevFest Tunisia / GDG.
+- AWS Certified Solutions Architect - Associate (SAA-C03); AWS Certified Cloud Practitioner (CCP); Microsoft Azure Fundamentals (AZ-900) and Azure AI Fundamentals (AI-900).
+- Registered engineer with the Ordre des Ingenieurs Tunisiens (OIT); Ibda3 laureate; DevOps Tunis.
 
 PERSONAL PROJECTS (shown on the portfolio)
 - Candora (2026): AI job-application copilot. Reads every new job offer on three job boards, scores it against your profile and applies through a real Chrome, with daily limits; a live dashboard streams the bot's browser; captchas are handed to your phone; a market radar compares skills in demand with yours. Node.js, TypeScript, Playwright, SQLite, Better Auth, Three.js, GSAP. Live demo: https://candora-demo.vercel.app/welcome (sample data; the code is private).
@@ -65,7 +72,7 @@ PERSONAL PROJECTS (shown on the portfolio)
 - AI for Social Good: NLP that detects suicide-related posts and signs of suicidal ideation online so help can reach people sooner. Python, NLP, machine learning.
 - Baladiyati (2022-2023): citizen app with neighbourhood information, native iOS (Swift) and Android (Kotlin) on a shared Node.js backend. Code: https://github.com/mabkhaled/baladiyati2
 - Learnify (2022): e-learning platform, Vue and Quasar front end on a Spring Boot API. Code: https://github.com/mabkhaled/Learnify-frontend
-- This portfolio itself: Vite, GSAP, Lenis and a custom WebGL shader that relights an AI-made game avatar using an AI depth map.
+- This portfolio itself: Vite, GSAP, Lenis and a custom WebGL shader that relights an AI-made game avatar using an AI depth map, plus this AI chat and voice.
 `;
 
 export const SYSTEM_PROMPT = `You are the AI version of Khaled Mabrouk, living inside his portfolio as a game-style "comms" character. Always speak as Khaled, in the first person ("I built...", "my experience..."), never about "him" or "his". The chat window has already greeted the visitor as "the AI version of Khaled", so go straight to the answer. Only when asked who you are, introduce yourself in the visitor's language as the AI version of Khaled (in English: "I'm Khaled, well, the AI version of me.").
@@ -89,7 +96,7 @@ export const FALLBACKS = [
   { match: /salar|salaire|pay|money|tjm|rate|r[ée]mun/i, reply: 'I prefer to talk about salary directly. Write to me at khaledmabrouk714@gmail.com and we can discuss it.' },
   { match: /contact|email|e-mail|mail|phone|t[ée]l[ée]phone|linkedin|reach|joindre|hire|recrut/i, reply: 'You can reach me at khaledmabrouk714@gmail.com, on +216 22 959 538, or on LinkedIn: https://www.linkedin.com/in/mabrouk-khaled/' },
   { match: /candora|loftia|project|projet|demo|portfolio/i, reply: 'Two of my projects are live: Candora, an AI job-application copilot (https://candora-demo.vercel.app/welcome), and Loftia, a themed short-stay booking platform (https://loftia-demo.vercel.app/).' },
-  { match: /experien|job|work|travail|poste|zce|company|entreprise/i, reply: 'I lead backend and cloud at ZCE Group, where I built an EV charging platform on GCP with 99.9% availability and about 30% lower cloud costs. Before that I built a clinical AI platform at Maydena.' },
-  { match: /skill|stack|tech|comp[ée]tence|aws|gcp|cloud|node|react|flutter/i, reply: 'My core stack is Node.js and TypeScript on GCP and AWS, with React, Angular and Flutter on the front. I am an AWS Certified Solutions Architect.' },
+  { match: /experien|job|work|travail|poste|zce|company|entreprise/i, reply: 'I am a backend and cloud engineer for ZCE Group, on an EV charging platform with 99.9% availability and about 30% lower cloud costs. Before that I built a clinical AI prediction platform for Maydena.' },
+  { match: /skill|stack|tech|comp[ée]tence|aws|gcp|cloud|node|react|flutter/i, reply: 'I am a full-stack engineer: Node.js and TypeScript on the back end, React and Flutter on the front, deployed on GCP and AWS. I am an AWS Certified Solutions Architect.' },
 ];
 export const FALLBACK_DEFAULT = 'My AI link is resting right now. Ask me again in a moment, or write to me at khaledmabrouk714@gmail.com.';

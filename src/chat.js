@@ -170,7 +170,7 @@ export function chat({ gsap, reduce, avatar }) {
   };
   const glow = (on) => {
     comms.classList.toggle('is-speaking', on);
-    if (avatar) gsap.to(avatar.state, { talk: on ? 0.6 : 0, duration: 0.4, overwrite: true });
+    if (avatar) gsap.to(avatar.state, { talk: on ? 0.6 : 0, duration: 0.4, overwrite: "auto" }); // "auto": never kill the scroll-driven hud tween
   };
 
   /** Types the reply out (glowing while it types), then swaps in the linkified version. */
