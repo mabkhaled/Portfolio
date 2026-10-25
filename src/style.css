@@ -334,6 +334,17 @@ html.gl-on .figure-img { visibility: hidden; }
   rotate: 45deg;
   border: 1px solid var(--accent);
 }
+.mission-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font: 500 0.82rem var(--f-mono);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.mission-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.mission-link.is-private { color: var(--muted); }
 .mission-stack {
   margin-top: auto;
   padding-top: 18px;
@@ -410,7 +421,8 @@ html.gl-on .figure-img { visibility: hidden; }
 .ach-icon::before { display: inline-block; rotate: -45deg; }
 .ach strong { display: block; font-weight: 600; line-height: 1.3; }
 .ach small { display: block; margin-top: 3px; font: 0.75rem var(--f-mono); color: var(--muted); letter-spacing: 0.04em; }
-.ach-major, .ach:last-child { grid-column: span 2; }
+/* Major cert spans the row; a lone last item does too, so the grid never ends with an empty cell. */
+.ach-major, .ach:last-child:nth-child(even) { grid-column: span 2; }
 .ach-major { padding: 26px 28px; border-color: rgba(79, 214, 228, 0.45); }
 .ach-major .ach-icon { width: 52px; height: 52px; margin: 6px 12px 6px 8px; font-size: 1.8rem; background: rgba(79, 214, 228, 0.16); }
 .ach-intro { display: grid; gap: 24px; position: sticky; top: 120px; }
@@ -551,7 +563,7 @@ html.gl-on .figure-img { visibility: hidden; }
   .bento { grid-template-columns: 1fr; }
   .slot-xl, .slot-wide { grid-column: auto; }
   .ach-list { grid-template-columns: 1fr; }
-  .ach-major, .ach:last-child { grid-column: auto; }
+  .ach-major, .ach:last-child:nth-child(even) { grid-column: auto; }
   .footer { flex-direction: column; }
 }
 @media (max-width: 767px) and (max-height: 700px) {

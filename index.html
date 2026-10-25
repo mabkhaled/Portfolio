@@ -26,7 +26,7 @@
     <a class="nav-mark" href="#top" aria-label="Khaled Mabrouk, back to top">KM</a>
     <nav aria-label="Main">
       <ul class="nav-links">
-        <li><a href="#missions">Missions</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#loadout">Loadout</a></li>
         <li><a href="#achievements">Achievements</a></li>
       </ul>
@@ -52,7 +52,7 @@
           <span class="line" aria-hidden="true"><span class="scramble" data-text="KHALED">KHALED</span></span>
           <span class="line" aria-hidden="true"><span class="scramble" data-text="MABROUK">MABROUK</span></span>
         </h1>
-        <p class="hero-sub">Software engineer and cloud architect. I build EV charging platforms, AI products and the cloud they run on.</p>
+        <p class="hero-sub">Backend and cloud engineer. I build real-time systems, AI products and the cloud they run on.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#contact">Let's talk <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
           <a class="btn btn-ghost" href="/media/Khaled_Mabrouk_CV.pdf" download>Download CV <i class="ph ph-download-simple" aria-hidden="true"></i></a>
@@ -71,10 +71,10 @@
       <div class="wrap stats-grid">
         <div class="stats-intro">
           <h2 class="h2 reveal" id="statsTitle">Built for production, not for demos.</h2>
-          <p class="body reveal">AWS-certified engineer shipping full-stack products across four domains: e-mobility, EdTech, HealthTech and assistive IoT. Architecture, CI/CD and observability, end to end.</p>
+          <p class="body reveal">AWS-certified backend and cloud engineer with two years in production. Real-time systems across energy, EdTech, HealthTech and assistive IoT, from architecture to observability.</p>
         </div>
         <ul class="stats-list">
-          <li class="stat"><span class="stat-num" data-to="99.9" data-dec="1" data-suffix="%">99.9%</span><span class="stat-label">availability on GCP microservices</span></li>
+          <li class="stat"><span class="stat-num" data-to="99.9" data-dec="1" data-suffix="%">99.9%</span><span class="stat-label">availability on production microservices</span></li>
           <li class="stat"><span class="stat-num" data-to="30" data-prefix="-" data-suffix="%">-30%</span><span class="stat-label">cloud spend after Redis and auto-scaling</span></li>
           <li class="stat"><span class="stat-num" data-to="1" data-prefix="&lt;" data-suffix="s">&lt;1s</span><span class="stat-label">EV charging session start over OCPP</span></li>
           <li class="stat"><span class="stat-num" data-to="40" data-prefix="-" data-suffix="%">-40%</span><span class="stat-label">voice recognition errors with DTW</span></li>
@@ -82,73 +82,88 @@
       </div>
     </section>
 
-    <!-- MISSIONS: horizontal pan -->
-    <section class="missions" id="missions" aria-labelledby="missionsTitle">
+    <!-- PROJECTS: horizontal pan -->
+    <section class="missions" id="projects" aria-labelledby="projectsTitle">
       <div class="missions-track" id="missionsTrack">
         <div class="mission-intro">
-          <h2 class="h2 reveal" id="missionsTitle">Missions</h2>
-          <p class="body reveal">Four production domains, from charge points to clinical AI.</p>
+          <h2 class="h2 reveal" id="projectsTitle">Side quests</h2>
+          <p class="body reveal">What I build on my own time: AI bots, mobile apps and learning tools.</p>
           <i class="ph ph-arrow-right missions-arrow" aria-hidden="true"></i>
         </div>
 
         <article class="mission panel">
           <header class="mission-head">
-            <i class="ph ph-lightning mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">Aug 2025 - now</span>
+            <i class="ph ph-robot mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">2026</span>
           </header>
-          <h3 class="mission-org">ZCE Group</h3>
-          <p class="mission-role">Software Engineer and Cloud Architect, full remote for Grenoble</p>
+          <h3 class="mission-org">Candora</h3>
+          <p class="mission-role">AI job-application copilot</p>
           <ul class="mission-points">
-            <li>Built the EV charging supervision apps end to end: React and Angular web, Flutter mobile, Node.js on Google Cloud.</li>
-            <li>Real-time OCPP integration with charge points over WebSockets, session start under one second.</li>
-            <li>Zero-downtime GitHub Actions deploys and about 30% lower cloud spend.</li>
+            <li>Searches three job boards, scores every new offer against my profile and handles the applications.</li>
+            <li>Live dashboard with the bot's browser view, a run tracker, application history and a market radar.</li>
+            <li>Hands the browser back to a human only when a site asks for a captcha, then pings the phone.</li>
           </ul>
-          <p class="mission-stack">Node.js / TypeScript / Flutter / React / Angular / GCP / Redis / OCPP</p>
+          <p class="mission-stack">Node.js / Playwright / SQLite / Better Auth / IMAP / GitHub Codespaces</p>
+          <span class="mission-link is-private"><i class="ph ph-lock-simple" aria-hidden="true"></i> Private repo</span>
         </article>
 
         <article class="mission panel">
           <header class="mission-head">
-            <i class="ph ph-exam mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">Jun 2026 - now</span>
+            <i class="ph ph-hand-heart mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">NLP research</span>
           </header>
-          <h3 class="mission-org">Pro-Corrector</h3>
-          <p class="mission-role">Full-stack and AI engineer, EdTech freelance</p>
+          <h3 class="mission-org">AI for Social Good</h3>
+          <p class="mission-role">Language models for suicide prevention</p>
           <ul class="mission-points">
-            <li>SaaS that grades scanned exam papers for secondary-school teachers with LLM assistance.</li>
-            <li>Multi-LLM orchestration across OpenAI, Anthropic and Mistral for grading reliability.</li>
-            <li>Stripe billing and GDPR-by-design for minors' data.</li>
+            <li>Detects suicide-related posts and signs of suicidal ideation in online text.</li>
+            <li>Built to flag at-risk messages early so someone can reach out in time.</li>
           </ul>
-          <p class="mission-stack">React / TypeScript / Node.js / PostgreSQL / Stripe / Docker / GCP</p>
+          <p class="mission-stack">Python / NLP / Machine learning</p>
         </article>
 
         <article class="mission panel">
           <header class="mission-head">
-            <i class="ph ph-heartbeat mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">Oct 2024 - Mar 2025</span>
+            <i class="ph ph-telegram-logo mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">2021</span>
           </header>
-          <h3 class="mission-org">Maydena</h3>
-          <p class="mission-role">Full-stack mobile and web engineer, HealthTech AI</p>
+          <h3 class="mission-org">App Generator Bot</h3>
+          <p class="mission-role">A chatbot that builds mobile apps</p>
           <ul class="mission-points">
-            <li>Delivered an AI medical platform with a clinical prediction engine, from design to production.</li>
-            <li>JWT and granular RBAC for patients, practitioners and admins.</li>
-            <li>GitLab CI/CD to Kubernetes for reproducible releases.</li>
+            <li>Telegram bot that asks a few questions and generates a personalised Flutter APK.</li>
+            <li>Python bot driving a Flutter build pipeline from chat to installable app.</li>
           </ul>
-          <p class="mission-stack">Kotlin / Angular / Spring Boot / MongoDB / MySQL / Kubernetes</p>
+          <p class="mission-stack">Python / Telegram Bot API / Flutter</p>
+          <a class="mission-link" href="https://github.com/mabkhaled/botflutter" target="_blank" rel="noopener">View code <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
         </article>
 
         <article class="mission panel">
           <header class="mission-head">
-            <i class="ph ph-wheelchair-motion mission-icon" aria-hidden="true"></i>
-            <span class="mission-date">Mar 2024 - Sep 2024</span>
+            <i class="ph ph-buildings mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">2022 - 2023</span>
           </header>
-          <h3 class="mission-org">Gewinner</h3>
-          <p class="mission-role">Flutter and serverless engineer, assistive IoT</p>
+          <h3 class="mission-org">Baladiyati</h3>
+          <p class="mission-role">Your city in your pocket</p>
           <ul class="mission-points">
-            <li>Voice-controlled wheelchair app in Flutter, with DTW recognition that holds up in noisy rooms.</li>
-            <li>Real-time geolocation and an in-app NLP chatbot.</li>
-            <li>Serverless AWS backend on Lambda, API Gateway, Cognito and DynamoDB.</li>
+            <li>Mobile app that gives citizens the information they need about their neighbourhood.</li>
+            <li>Native iOS and Android clients on a shared Node.js backend.</li>
           </ul>
-          <p class="mission-stack">Flutter / Dart / AWS Lambda / Cognito / DynamoDB / NLP</p>
+          <p class="mission-stack">Swift / Kotlin / Node.js</p>
+          <a class="mission-link" href="https://github.com/mabkhaled/baladiyati2" target="_blank" rel="noopener">View code <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        </article>
+
+        <article class="mission panel">
+          <header class="mission-head">
+            <i class="ph ph-books mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">2022</span>
+          </header>
+          <h3 class="mission-org">Learnify</h3>
+          <p class="mission-role">E-learning platform</p>
+          <ul class="mission-points">
+            <li>Courses, tutoring and learning tools in one web platform.</li>
+            <li>Vue and Quasar front end on a Spring Boot API, with external services plugged in.</li>
+          </ul>
+          <p class="mission-stack">Vue.js / Quasar / Spring Boot / Java</p>
+          <a class="mission-link" href="https://github.com/mabkhaled/Learnify-frontend" target="_blank" rel="noopener">View code <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
         </article>
       </div>
     </section>
@@ -161,22 +176,22 @@
           <article class="slot slot-xl panel">
             <i class="ph ph-cloud slot-icon" aria-hidden="true"></i>
             <h3>Cloud and DevOps</h3>
-            <p>GCP Cloud Run and Cloud SQL, AWS Lambda, API Gateway and Cognito, Docker, Kubernetes, Terraform, GitHub Actions, GitLab CI.</p>
+            <p>GCP Cloud Run, Cloud SQL, Pub/Sub and Secret Manager. AWS Lambda, API Gateway, Cognito and DynamoDB. Docker, Kubernetes, Terraform, GitHub Actions, GitLab CI and FinOps.</p>
           </article>
           <article class="slot slot-tall panel">
             <i class="ph ph-graph slot-icon" aria-hidden="true"></i>
             <h3>Architecture</h3>
-            <p>Microservices, serverless, event-driven, 99.9% availability, zero-downtime deploys, SLOs and distributed tracing.</p>
+            <p>Microservices, serverless and event-driven design. Idempotency and retries, circuit breakers and backpressure, zero-downtime deploys, SLOs and distributed tracing.</p>
           </article>
           <article class="slot panel">
             <i class="ph ph-brain slot-icon" aria-hidden="true"></i>
             <h3>AI and LLM</h3>
-            <p>Multi-LLM orchestration with OpenAI, Anthropic and Mistral. NLP, Python, DTW.</p>
+            <p>Multi-LLM orchestration with fallback and cost control, OCR to LLM pipelines, output evaluation, NLP, Python.</p>
           </article>
           <article class="slot panel">
             <i class="ph ph-hard-drives slot-icon" aria-hidden="true"></i>
-            <h3>Back-end</h3>
-            <p>Node.js and TypeScript, Spring Boot, ASP.NET Core, REST, WebSockets, OCPP, Stripe.</p>
+            <h3>Back-end and real time</h3>
+            <p>Node.js and TypeScript with Express and Prisma, Spring Boot, versioned REST, WebSockets, OCPP, MQTT, idempotent Stripe webhooks.</p>
           </article>
           <article class="slot slot-wide panel">
             <i class="ph ph-device-mobile slot-icon" aria-hidden="true"></i>
@@ -186,12 +201,12 @@
           <article class="slot panel">
             <i class="ph ph-database slot-icon" aria-hidden="true"></i>
             <h3>Data</h3>
-            <p>PostgreSQL, MySQL, MongoDB, Redis, DynamoDB.</p>
+            <p>PostgreSQL, MySQL, MongoDB, Redis, DynamoDB and telemetry time series.</p>
           </article>
           <article class="slot panel">
             <i class="ph ph-shield-check slot-icon" aria-hidden="true"></i>
             <h3>Security</h3>
-            <p>OAuth2 and JWT, RBAC, least-privilege IAM, GDPR compliance.</p>
+            <p>OAuth2 and OIDC, JWT rotation, multi-tenant RBAC, least-privilege IAM, OWASP Top 10, GDPR by design.</p>
           </article>
         </div>
       </div>
@@ -205,7 +220,7 @@
       <div class="wrap ach-grid">
         <div class="ach-intro">
           <h2 class="h2 reveal" id="achTitle">Achievements unlocked</h2>
-          <p class="body reveal">Certified on AWS and Azure, trained as a software engineer, recognised for innovation by the Francophonie.</p>
+          <p class="body reveal">Certified on AWS and Azure, a registered engineer, recognised for innovation by the Francophonie.</p>
         </div>
         <ul class="ach-list">
           <li class="ach ach-major"><i class="ph ph-trophy ach-icon" aria-hidden="true"></i><span><strong>AWS Certified Solutions Architect</strong><small>Associate, SAA-C03</small></span></li>
@@ -213,6 +228,7 @@
           <li class="ach"><i class="ph ph-certificate ach-icon" aria-hidden="true"></i><span><strong>Azure Fundamentals</strong><small>AZ-900</small></span></li>
           <li class="ach"><i class="ph ph-sparkle ach-icon" aria-hidden="true"></i><span><strong>Azure AI Fundamentals</strong><small>AI-900</small></span></li>
           <li class="ach"><i class="ph ph-medal ach-icon" aria-hidden="true"></i><span><strong>Ibda3 Laureate</strong><small>Francophonie and ICESCO</small></span></li>
+          <li class="ach"><i class="ph ph-seal-check ach-icon" aria-hidden="true"></i><span><strong>Registered Engineer</strong><small>Ordre des Ingénieurs Tunisiens</small></span></li>
           <li class="ach"><i class="ph ph-graduation-cap ach-icon" aria-hidden="true"></i><span><strong>Software Engineering Diploma</strong><small>TEK-UP, 2022-2024</small></span></li>
         </ul>
       </div>

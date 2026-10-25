@@ -275,9 +275,9 @@ function scrollScenes() {
     });
   });
 
-  // Missions: vertical scroll drives a horizontal pan on wide screens.
+  // Projects: vertical scroll drives a horizontal pan on wide screens.
   gsap.matchMedia().add("(min-width: 768px)", () => {
-    const sec = $("#missions");
+    const sec = $("#projects");
     const track = $("#missionsTrack");
     const dist = () => Math.max(0, track.scrollWidth - sec.clientWidth);
     const pan = gsap.to(track, {
@@ -331,7 +331,7 @@ function scrollScenes() {
 /* ---------- Comms: one line per section, typed like game dialogue ---------- */
 const LINES = {
   stats: "These numbers come from production, not from slides.",
-  missions: "Four missions so far. Keep scrolling to fly through them.",
+  projects: "Side quests. Things I build when nobody is paying me to.",
   loadout: "My loadout. Cloud first, then whatever the mission needs.",
   achievements: "Certified on AWS and Azure. More unlocking soon.",
   contact: "Your move, player two.",
