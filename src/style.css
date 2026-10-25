@@ -165,7 +165,6 @@ h1, h2, h3, p, dl, dd { margin: 0; }
   position: relative;
   min-height: 100dvh;
   overflow: hidden;
-  isolation: isolate;
 }
 .hero-glow {
   position: absolute;
@@ -178,50 +177,41 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 }
 .hero-dust { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
+/* Layout box for the avatar. Aspect = image cropped at 92% height (892 x 1104), matches CROP_HERO. */
 .figure {
-  --fig-h: 86dvh;
   position: absolute;
   z-index: 2;
-  height: var(--fig-h);
-  aspect-ratio: 1376 / 768;
-  left: 62%;
-  bottom: calc(var(--fig-h) * -0.12);
+  top: 9dvh;
+  left: 61%;
+  height: 94dvh;
+  aspect-ratio: 892 / 1104;
   translate: -50% 0;
-  transform-origin: 50% 100%;
-  -webkit-mask-image: radial-gradient(ellipse 40% 72% at 50% 54%, #000 56%, transparent 100%);
-  mask-image: radial-gradient(ellipse 40% 72% at 50% 54%, #000 56%, transparent 100%);
 }
-.figure-fade {
-  position: absolute;
-  inset: 0;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 70%, transparent 95%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 70%, transparent 95%);
+.figure-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 98%), radial-gradient(ellipse 50% 60% at 50% 45%, #000 60%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 98%), radial-gradient(ellipse 50% 60% at 50% 45%, #000 60%, transparent 100%);
+  mask-composite: intersect;
 }
-.figure-img, .figure-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.figure-video { opacity: 0; transition: opacity 0.6s var(--ease); }
-.figure-video.is-ready { opacity: 1; }
-/* Cursor acts as a cyan key light on the character. */
-.figure-light {
-  position: absolute;
+html.gl-on .figure-img { visibility: hidden; }
+
+/* Full-viewport WebGL layer; draws only inside the figure or comms box. */
+.avatar-gl {
+  position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
   pointer-events: none;
-  mix-blend-mode: color-dodge;
-  background: radial-gradient(circle at var(--lx, 46%) var(--ly, 26%), rgba(79, 214, 228, 0.42), rgba(79, 214, 228, 0.12) 16%, transparent 34%);
-}
-.figure-scan {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  height: 2px;
-  opacity: 0;
-  background: linear-gradient(90deg, transparent, var(--accent) 30%, #fff 50%, var(--accent) 70%, transparent);
-  box-shadow: 0 0 24px 4px rgba(79, 214, 228, 0.55);
 }
 
 .hero-copy {
   position: absolute;
-  z-index: 3;
+  z-index: 6;
   left: var(--gutter);
   top: 52%;
   translate: 0 -50%;
@@ -245,7 +235,7 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 
 .hero-hud {
   position: absolute;
-  z-index: 3;
+  z-index: 6;
   right: var(--gutter);
   bottom: 9dvh;
   display: grid;
@@ -469,6 +459,60 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 .icon-link:hover { border-color: var(--accent); color: var(--accent); }
 .contact-mail { font: 0.85rem var(--f-mono); color: var(--muted); letter-spacing: 0.04em; }
 
+/* Comms: the avatar beams into this corner portrait after the hero. */
+.comms {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 45;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+.comms-portrait {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.comms-portrait::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(79, 214, 228, 0.55);
+  border-radius: 12px 0 12px 0;
+  box-shadow: 0 0 30px -8px rgba(79, 214, 228, 0.6), inset 0 0 20px -10px rgba(79, 214, 228, 0.6);
+}
+@supports (corner-shape: bevel) { .comms-portrait::before { corner-shape: bevel; } }
+.comms-tag {
+  position: absolute;
+  left: -5px;
+  top: -24px;
+  font: 600 0.62rem var(--f-mono);
+  letter-spacing: 0.24em;
+  color: var(--accent);
+}
+.comms.is-on .comms-portrait { opacity: 1; }
+.comms-box {
+  max-width: min(300px, 60vw);
+  padding: 12px 16px 14px;
+  background: rgba(4, 14, 18, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px 0 10px 0;
+  opacity: 0;
+  translate: -8px 0;
+  transition: opacity 0.4s var(--ease), translate 0.4s var(--ease);
+}
+@supports (corner-shape: bevel) { .comms-box { corner-shape: bevel; } }
+.comms.is-talking .comms-box { opacity: 1; translate: 0 0; }
+.comms-name { font: 0.62rem var(--f-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.comms-line { margin-top: 6px; font-size: 0.95rem; line-height: 1.45; min-height: 1.45em; }
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -492,7 +536,10 @@ h1, h2, h3, p, dl, dd { margin: 0; }
 /* Mobile */
 @media (max-width: 767px) {
   .nav-links { display: none; }
-  .figure { --fig-h: 64dvh; left: 50%; }
+  .figure { top: auto; bottom: -4dvh; left: 50%; height: 60dvh; }
+  .comms { left: 12px; bottom: 12px; }
+  .comms-portrait { width: 76px; height: 76px; }
+  .comms-line { font-size: 0.88rem; }
   .hero-copy { top: 96px; translate: none; width: auto; right: var(--gutter); gap: 18px; }
   .hero-sub { max-width: 30ch; }
   .hero-hud { display: none; }
@@ -508,7 +555,7 @@ h1, h2, h3, p, dl, dd { margin: 0; }
   .footer { flex-direction: column; }
 }
 @media (max-width: 767px) and (max-height: 700px) {
-  .figure { --fig-h: 56dvh; }
+  .figure { height: 52dvh; }
 }
 
 /* Reduced motion: everything static and reachable */

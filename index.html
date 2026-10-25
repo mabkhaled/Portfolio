@@ -40,14 +40,10 @@
       <div class="hero-glow" data-depth="-0.4" aria-hidden="true"></div>
       <canvas class="hero-dust" id="dust" aria-hidden="true"></canvas>
 
+      <!-- WebGL draws the living avatar into this box; the img is the no-WebGL / reduced-motion fallback. -->
       <div class="figure" id="figure" data-depth="0.25">
-        <div class="figure-fade">
-          <img class="figure-img" id="figureImg" src="/media/avatar.webp" width="1376" height="768"
-               alt="Khaled Mabrouk rendered as a video game character in a dark navy tech jacket" />
-          <video class="figure-video" id="figureVideo" muted playsinline preload="none" aria-hidden="true"></video>
-          <div class="figure-light" id="figureLight" aria-hidden="true"></div>
-        </div>
-        <div class="figure-scan" aria-hidden="true"></div>
+        <img class="figure-img" id="figureImg" src="/media/avatar.webp" width="892" height="1200"
+             alt="Khaled Mabrouk as a video game character in a navy tech jacket with a holographic wrist display" />
       </div>
 
       <div class="hero-copy" data-depth="-0.15">
@@ -236,6 +232,14 @@
       </div>
     </section>
   </main>
+
+  <aside class="comms" id="comms" aria-hidden="true">
+    <div class="comms-portrait" id="commsPortrait"><span class="comms-tag">KM</span></div>
+    <div class="comms-box">
+      <span class="comms-name">Khaled // comms</span>
+      <p class="comms-line" id="commsLine"></p>
+    </div>
+  </aside>
 
   <footer class="footer wrap">
     <span>&copy; 2026 Khaled Mabrouk</span>

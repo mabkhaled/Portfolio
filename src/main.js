@@ -9,6 +9,7 @@ import "./style.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { createAvatar } from "./avatar.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,9 +59,9 @@ $("#marqueeTrack").innerHTML =
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*<>/";
 function scramble(el, speed = 2.4) {
   const final = el.dataset.text;
-  let frame = 0;
+  const start = performance.now();
   const step = () => {
-    frame++;
+    const frame = (performance.now() - start) / 16.7; // time-based so 60/120/144Hz screens match
     let out = "";
     for (let i = 0; i < final.length; i++) {
       const c = final[i];
@@ -73,14 +74,19 @@ function scramble(el, speed = 2.4) {
   step();
 }
 
-/* ---------- Hero: pointer, light, head-turn video ---------- */
+/* ---------- Hero: living avatar + depth parallax ---------- */
 const hero = $("#hero");
-const figure = $("#figure");
-const light = $("#figureLight");
-const video = $("#figureVideo");
-const pointer = { x: 0.5, y: 0.45, moved: 0 };
-const lightPos = { x: 46, y: 26 };
+const pointer = { x: 0.5, y: 0.45 };
 let heroVisible = true;
+const avatar = reduce
+  ? null
+  : createAvatar({
+      figureEl: $("#figure"),
+      portraitEl: $("#commsPortrait"),
+      src: "/media/avatar.webp",
+      depthSrc: "/media/avatar-depth.webp",
+      ticker: gsap.ticker,
+    });
 new IntersectionObserver(([e]) => (heroVisible = e.isIntersecting)).observe(hero);
 
 if (fine && !reduce) {
@@ -93,63 +99,12 @@ if (fine && !reduce) {
     const r = hero.getBoundingClientRect();
     pointer.x = (e.clientX - r.left) / r.width;
     pointer.y = (e.clientY - r.top) / r.height;
-    pointer.moved = performance.now();
     layers.forEach((l) => {
       l.x((pointer.x - 0.5) * 70 * l.d);
       l.y((pointer.y - 0.5) * 36 * l.d);
     });
   });
 }
-
-// Optional head-turn clip: drop public/media/head-turn.mp4 in and the cursor scrubs it.
-let videoReady = false;
-let shownT = 0.5;
-async function loadHeadTurn() {
-  if (reduce) return;
-  try {
-    const res = await fetch("/media/head-turn.mp4");
-    if (!res.ok || !(res.headers.get("content-type") || "").startsWith("video")) return;
-    // Whole clip as a blob so every seek is instant instead of waiting on the network.
-    video.src = URL.createObjectURL(await res.blob());
-    await new Promise((ok, ko) => {
-      video.onloadeddata = ok;
-      video.onerror = ko;
-    });
-    videoReady = true;
-    video.classList.add("is-ready");
-  } catch {
-    /* no clip: the still image stays */
-  }
-}
-
-gsap.ticker.add((time) => {
-  if (!heroVisible || reduce) return;
-  const idle = !fine || performance.now() - pointer.moved > 3500;
-  // Light follows the cursor; when idle it orbits slowly over the face and chest.
-  const fr = figure.getBoundingClientRect();
-  let tx, ty;
-  if (idle) {
-    tx = 50 + Math.sin(time * 0.5) * 9;
-    ty = 30 + Math.cos(time * 0.37) * 10;
-  } else {
-    tx = ((pointer.x * hero.clientWidth - (fr.left - hero.getBoundingClientRect().left)) / fr.width) * 100;
-    ty = ((pointer.y * hero.clientHeight - (fr.top - hero.getBoundingClientRect().top)) / fr.height) * 100;
-  }
-  lightPos.x += (tx - lightPos.x) * 0.08;
-  lightPos.y += (ty - lightPos.y) * 0.08;
-  light.style.setProperty("--lx", lightPos.x.toFixed(2) + "%");
-  light.style.setProperty("--ly", lightPos.y.toFixed(2) + "%");
-
-  if (videoReady && video.duration) {
-    // Pointer x across 14%..86% of the hero maps to the clip start..end; idle drifts around the middle.
-    const target = idle
-      ? 0.5 + Math.sin(time * 0.45) * 0.32
-      : gsap.utils.clamp(0, 1, (pointer.x - 0.14) / 0.72);
-    shownT += (target - shownT) * 0.14;
-    const t = shownT * (video.duration - 0.05);
-    if (!video.seeking && Math.abs(video.currentTime - t) > 0.02) video.currentTime = t;
-  }
-});
 
 /* ---------- Ambient dust with depth ---------- */
 function startDust() {
@@ -211,7 +166,10 @@ function startDust() {
 /* ---------- Boot sequence, then hero entrance ---------- */
 async function boot() {
   const bootEl = $("#boot");
-  const ready = Promise.all([$("#figureImg").decode().catch(() => {}), document.fonts.ready]);
+  const ready = Promise.all([
+    avatar ? avatar.ready.catch(() => {}) : $("#figureImg").decode().catch(() => {}),
+    document.fonts.ready,
+  ]);
   if (reduce) {
     await ready;
     bootEl.remove();
@@ -237,12 +195,10 @@ async function boot() {
 
 function heroIntro() {
   const tl = gsap.timeline({ defaults: { ease: "expo.out" }, delay: 0.35 });
-  // Character "spawns": a scan line sweeps up and materialises him from a white-hot silhouette.
-  tl.fromTo(".figure-fade", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "power3.inOut" }, 0)
-    .fromTo(".figure-scan", { top: "100%", opacity: 1 }, { top: "0%", duration: 1.6, ease: "power3.inOut" }, 0)
-    .to(".figure-scan", { opacity: 0, duration: 0.4 }, 1.45)
-    .from(".figure-img", { filter: "brightness(2.6) saturate(0) contrast(1.2)", duration: 2, ease: "power2.out" }, 0.15)
-    .from(".nav", { yPercent: -100, opacity: 0, duration: 1 }, 0.3)
+  // Character spawns: a scanner sweeps up drawing depth contours, then the photo resolves.
+  if (avatar) tl.fromTo(avatar.state, { intro: 0 }, { intro: 1, duration: 2.4, ease: "power2.inOut" }, 0);
+  else tl.from(".figure-img", { opacity: 0, y: 30, duration: 1.6 }, 0);
+  tl.from(".nav", { yPercent: -100, opacity: 0, duration: 1 }, 0.3)
     .from(".hero-eyebrow", { opacity: 0, x: -24, duration: 0.9 }, 0.5)
     .from(".hero-name .line > span", { yPercent: 105, duration: 1.2, stagger: 0.12 }, 0.55)
     .add(() => $$(".hero-name .scramble").forEach((el, i) => setTimeout(() => scramble(el), i * 140)), 0.55)
@@ -263,9 +219,30 @@ function scrollScenes() {
 
   if (reduce) return;
 
-  // Camera push: the character steps closer while the title lifts away.
+  // Leaving the hero, the avatar beams down into the comms portrait and stays with you.
+  if (avatar) {
+    const comms = $("#comms");
+    const say = commsLines(comms); // before the tween: onUpdate can fire on creation when the page loads scrolled
+    gsap.to(avatar.state, {
+      hud: 1,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: hero,
+        start: "top top",
+        end: "bottom 25%",
+        scrub: 0.6,
+        onUpdate: (st) => {
+          const on = st.progress > 0.98;
+          if (on === comms.classList.contains("is-on")) return;
+          comms.classList.toggle("is-on", on);
+          if (on) say.flush();
+          else comms.classList.remove("is-talking");
+        },
+      },
+    });
+  }
+
   gsap.timeline({ scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } })
-    .to(".figure", { yPercent: 10, scale: 1.12, ease: "none" }, 0)
     .to(".hero-copy", { yPercent: -40, opacity: 0, ease: "none" }, 0)
     .to(".hero-hud", { yPercent: -60, opacity: 0, ease: "none" }, 0)
     .to(".hero-glow", { opacity: 0.25, ease: "none" }, 0);
@@ -351,6 +328,48 @@ function scrollScenes() {
   ScrollTrigger.create({ trigger: ct, start: "top 85%", once: true, onEnter: () => scramble(ct, 1.2) });
 }
 
+/* ---------- Comms: one line per section, typed like game dialogue ---------- */
+const LINES = {
+  stats: "These numbers come from production, not from slides.",
+  missions: "Four missions so far. Keep scrolling to fly through them.",
+  loadout: "My loadout. Cloud first, then whatever the mission needs.",
+  achievements: "Certified on AWS and Azure. More unlocking soon.",
+  contact: "Your move, player two.",
+};
+function commsLines(comms) {
+  const out = $("#commsLine");
+  let typing = 0;
+  let hideTimer = 0;
+  let pending = "";
+  const say = (text) => {
+    // Section reached before he finished beaming in: speak once he lands.
+    if (!comms.classList.contains("is-on")) return void (pending = text);
+    pending = "";
+    clearInterval(typing);
+    clearTimeout(hideTimer);
+    comms.classList.add("is-talking");
+    let i = 0;
+    out.textContent = "";
+    typing = setInterval(() => {
+      out.textContent = text.slice(0, ++i);
+      if (i >= text.length) {
+        clearInterval(typing);
+        hideTimer = setTimeout(() => comms.classList.remove("is-talking"), 3800);
+      }
+    }, 26);
+  };
+  Object.entries(LINES).forEach(([id, text]) =>
+    ScrollTrigger.create({
+      trigger: "#" + id,
+      start: "top 55%",
+      onEnter: () => say(text),
+      onEnterBack: () => say(text),
+    })
+  );
+  say.flush = () => pending && say(pending);
+  return say;
+}
+
 /* ---------- Micro-interactions ---------- */
 function interactions() {
   document.addEventListener(
@@ -384,4 +403,3 @@ if (!reduce) startDust();
 interactions();
 scrollScenes();
 boot().then(() => ScrollTrigger.refresh());
-loadHeadTurn();
