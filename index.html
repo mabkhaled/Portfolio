@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khaled Mabrouk | Software Engineer and Cloud Architect</title>
+  <meta name="description" content="Khaled Mabrouk, AWS-certified software engineer and cloud architect. EV charging platforms, AI products, Flutter, React, Node.js on GCP and AWS." />
+  <meta name="theme-color" content="#020709" />
+  <meta property="og:title" content="Khaled Mabrouk | Software Engineer and Cloud Architect" />
+  <meta property="og:description" content="EV charging platforms, AI products and the cloud they run on." />
+  <meta property="og:image" content="/media/avatar.webp" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" href="/media/avatar.webp" fetchpriority="high" />
+</head>
+<body>
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <span class="boot-mark">KM</span>
+      <span class="boot-label">Loading player</span>
+      <span class="boot-count" id="bootCount">00</span>
+      <span class="boot-bar"><span id="bootBar"></span></span>
+    </div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav-mark" href="#top" aria-label="Khaled Mabrouk, back to top">KM</a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#missions">Missions</a></li>
+        <li><a href="#loadout">Loadout</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-ghost nav-cta" href="#contact">Let's talk</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO: character select -->
+    <section class="hero" id="hero" aria-label="Introduction">
+      <div class="hero-glow" data-depth="-0.4" aria-hidden="true"></div>
+      <canvas class="hero-dust" id="dust" aria-hidden="true"></canvas>
+
+      <div class="figure" id="figure" data-depth="0.25">
+        <div class="figure-fade">
+          <img class="figure-img" id="figureImg" src="/media/avatar.webp" width="1376" height="768"
+               alt="Khaled Mabrouk rendered as a video game character in a dark navy tech jacket" />
+          <video class="figure-video" id="figureVideo" muted playsinline preload="none" aria-hidden="true"></video>
+          <div class="figure-light" id="figureLight" aria-hidden="true"></div>
+        </div>
+        <div class="figure-scan" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-copy" data-depth="-0.15">
+        <p class="eyebrow hero-eyebrow">Player one</p>
+        <h1 class="hero-name" aria-label="Khaled Mabrouk">
+          <span class="line" aria-hidden="true"><span class="scramble" data-text="KHALED">KHALED</span></span>
+          <span class="line" aria-hidden="true"><span class="scramble" data-text="MABROUK">MABROUK</span></span>
+        </h1>
+        <p class="hero-sub">Software engineer and cloud architect. I build EV charging platforms, AI products and the cloud they run on.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#contact">Let's talk <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <a class="btn btn-ghost" href="/media/Khaled_Mabrouk_CV.pdf" download>Download CV <i class="ph ph-download-simple" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <dl class="hero-hud" aria-label="Character profile">
+        <div><dt>Class</dt><dd>Cloud Architect</dd></div>
+        <div><dt>Base</dt><dd>Tunis, remote</dd></div>
+        <div><dt>Status</dt><dd class="hud-live">Open to missions</dd></div>
+      </dl>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats section" id="stats" aria-labelledby="statsTitle">
+      <div class="wrap stats-grid">
+        <div class="stats-intro">
+          <h2 class="h2 reveal" id="statsTitle">Built for production, not for demos.</h2>
+          <p class="body reveal">AWS-certified engineer shipping full-stack products across four domains: e-mobility, EdTech, HealthTech and assistive IoT. Architecture, CI/CD and observability, end to end.</p>
+        </div>
+        <ul class="stats-list">
+          <li class="stat"><span class="stat-num" data-to="99.9" data-dec="1" data-suffix="%">99.9%</span><span class="stat-label">availability on GCP microservices</span></li>
+          <li class="stat"><span class="stat-num" data-to="30" data-prefix="-" data-suffix="%">-30%</span><span class="stat-label">cloud spend after Redis and auto-scaling</span></li>
+          <li class="stat"><span class="stat-num" data-to="1" data-prefix="&lt;" data-suffix="s">&lt;1s</span><span class="stat-label">EV charging session start over OCPP</span></li>
+          <li class="stat"><span class="stat-num" data-to="40" data-prefix="-" data-suffix="%">-40%</span><span class="stat-label">voice recognition errors with DTW</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MISSIONS: horizontal pan -->
+    <section class="missions" id="missions" aria-labelledby="missionsTitle">
+      <div class="missions-track" id="missionsTrack">
+        <div class="mission-intro">
+          <h2 class="h2 reveal" id="missionsTitle">Missions</h2>
+          <p class="body reveal">Four production domains, from charge points to clinical AI.</p>
+          <i class="ph ph-arrow-right missions-arrow" aria-hidden="true"></i>
+        </div>
+
+        <article class="mission panel">
+          <header class="mission-head">
+            <i class="ph ph-lightning mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">Aug 2025 - now</span>
+          </header>
+          <h3 class="mission-org">ZCE Group</h3>
+          <p class="mission-role">Software Engineer and Cloud Architect, full remote for Grenoble</p>
+          <ul class="mission-points">
+            <li>Built the EV charging supervision apps end to end: React and Angular web, Flutter mobile, Node.js on Google Cloud.</li>
+            <li>Real-time OCPP integration with charge points over WebSockets, session start under one second.</li>
+            <li>Zero-downtime GitHub Actions deploys and about 30% lower cloud spend.</li>
+          </ul>
+          <p class="mission-stack">Node.js / TypeScript / Flutter / React / Angular / GCP / Redis / OCPP</p>
+        </article>
+
+        <article class="mission panel">
+          <header class="mission-head">
+            <i class="ph ph-exam mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">Jun 2026 - now</span>
+          </header>
+          <h3 class="mission-org">Pro-Corrector</h3>
+          <p class="mission-role">Full-stack and AI engineer, EdTech freelance</p>
+          <ul class="mission-points">
+            <li>SaaS that grades scanned exam papers for secondary-school teachers with LLM assistance.</li>
+            <li>Multi-LLM orchestration across OpenAI, Anthropic and Mistral for grading reliability.</li>
+            <li>Stripe billing and GDPR-by-design for minors' data.</li>
+          </ul>
+          <p class="mission-stack">React / TypeScript / Node.js / PostgreSQL / Stripe / Docker / GCP</p>
+        </article>
+
+        <article class="mission panel">
+          <header class="mission-head">
+            <i class="ph ph-heartbeat mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">Oct 2024 - Mar 2025</span>
+          </header>
+          <h3 class="mission-org">Maydena</h3>
+          <p class="mission-role">Full-stack mobile and web engineer, HealthTech AI</p>
+          <ul class="mission-points">
+            <li>Delivered an AI medical platform with a clinical prediction engine, from design to production.</li>
+            <li>JWT and granular RBAC for patients, practitioners and admins.</li>
+            <li>GitLab CI/CD to Kubernetes for reproducible releases.</li>
+          </ul>
+          <p class="mission-stack">Kotlin / Angular / Spring Boot / MongoDB / MySQL / Kubernetes</p>
+        </article>
+
+        <article class="mission panel">
+          <header class="mission-head">
+            <i class="ph ph-wheelchair-motion mission-icon" aria-hidden="true"></i>
+            <span class="mission-date">Mar 2024 - Sep 2024</span>
+          </header>
+          <h3 class="mission-org">Gewinner</h3>
+          <p class="mission-role">Flutter and serverless engineer, assistive IoT</p>
+          <ul class="mission-points">
+            <li>Voice-controlled wheelchair app in Flutter, with DTW recognition that holds up in noisy rooms.</li>
+            <li>Real-time geolocation and an in-app NLP chatbot.</li>
+            <li>Serverless AWS backend on Lambda, API Gateway, Cognito and DynamoDB.</li>
+          </ul>
+          <p class="mission-stack">Flutter / Dart / AWS Lambda / Cognito / DynamoDB / NLP</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- LOADOUT -->
+    <section class="loadout section" id="loadout" aria-labelledby="loadoutTitle">
+      <div class="wrap">
+        <h2 class="h2 reveal" id="loadoutTitle">Loadout</h2>
+        <div class="bento">
+          <article class="slot slot-xl panel">
+            <i class="ph ph-cloud slot-icon" aria-hidden="true"></i>
+            <h3>Cloud and DevOps</h3>
+            <p>GCP Cloud Run and Cloud SQL, AWS Lambda, API Gateway and Cognito, Docker, Kubernetes, Terraform, GitHub Actions, GitLab CI.</p>
+          </article>
+          <article class="slot slot-tall panel">
+            <i class="ph ph-graph slot-icon" aria-hidden="true"></i>
+            <h3>Architecture</h3>
+            <p>Microservices, serverless, event-driven, 99.9% availability, zero-downtime deploys, SLOs and distributed tracing.</p>
+          </article>
+          <article class="slot panel">
+            <i class="ph ph-brain slot-icon" aria-hidden="true"></i>
+            <h3>AI and LLM</h3>
+            <p>Multi-LLM orchestration with OpenAI, Anthropic and Mistral. NLP, Python, DTW.</p>
+          </article>
+          <article class="slot panel">
+            <i class="ph ph-hard-drives slot-icon" aria-hidden="true"></i>
+            <h3>Back-end</h3>
+            <p>Node.js and TypeScript, Spring Boot, ASP.NET Core, REST, WebSockets, OCPP, Stripe.</p>
+          </article>
+          <article class="slot slot-wide panel">
+            <i class="ph ph-device-mobile slot-icon" aria-hidden="true"></i>
+            <h3>Mobile and front-end</h3>
+            <p>Flutter with Bloc and clean architecture, React, Angular, native Android in Kotlin.</p>
+          </article>
+          <article class="slot panel">
+            <i class="ph ph-database slot-icon" aria-hidden="true"></i>
+            <h3>Data</h3>
+            <p>PostgreSQL, MySQL, MongoDB, Redis, DynamoDB.</p>
+          </article>
+          <article class="slot panel">
+            <i class="ph ph-shield-check slot-icon" aria-hidden="true"></i>
+            <h3>Security</h3>
+            <p>OAuth2 and JWT, RBAC, least-privilege IAM, GDPR compliance.</p>
+          </article>
+        </div>
+      </div>
+      <div class="marquee" aria-label="Technologies">
+        <div class="marquee-track" id="marqueeTrack"></div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="achievements section" id="achievements" aria-labelledby="achTitle">
+      <div class="wrap ach-grid">
+        <div class="ach-intro">
+          <h2 class="h2 reveal" id="achTitle">Achievements unlocked</h2>
+          <p class="body reveal">Certified on AWS and Azure, trained as a software engineer, recognised for innovation by the Francophonie.</p>
+        </div>
+        <ul class="ach-list">
+          <li class="ach ach-major"><i class="ph ph-trophy ach-icon" aria-hidden="true"></i><span><strong>AWS Certified Solutions Architect</strong><small>Associate, SAA-C03</small></span></li>
+          <li class="ach"><i class="ph ph-cloud-check ach-icon" aria-hidden="true"></i><span><strong>AWS Cloud Practitioner</strong><small>CCP</small></span></li>
+          <li class="ach"><i class="ph ph-certificate ach-icon" aria-hidden="true"></i><span><strong>Azure Fundamentals</strong><small>AZ-900</small></span></li>
+          <li class="ach"><i class="ph ph-sparkle ach-icon" aria-hidden="true"></i><span><strong>Azure AI Fundamentals</strong><small>AI-900</small></span></li>
+          <li class="ach"><i class="ph ph-medal ach-icon" aria-hidden="true"></i><span><strong>Ibda3 Laureate</strong><small>Francophonie and ICESCO</small></span></li>
+          <li class="ach"><i class="ph ph-graduation-cap ach-icon" aria-hidden="true"></i><span><strong>Software Engineering Diploma</strong><small>TEK-UP, 2022-2024</small></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact section" id="contact" aria-labelledby="contactTitle">
+      <div class="wrap contact-inner">
+        <h2 class="contact-title reveal" id="contactTitle">Ready for player two?</h2>
+        <p class="body reveal">Remote, or relocation to the EU. Tell me what you are building.</p>
+        <div class="contact-actions reveal">
+          <a class="btn btn-primary btn-lg" href="mailto:khaledmabrouk714@gmail.com">Let's talk <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <a class="icon-link" href="https://www.linkedin.com/in/mabrouk-khaled/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph ph-linkedin-logo" aria-hidden="true"></i></a>
+          <a class="icon-link" href="https://github.com/mabkhaled" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
+        </div>
+        <p class="contact-mail">khaledmabrouk714@gmail.com</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <span>&copy; 2026 Khaled Mabrouk</span>
+    <a href="/media/Khaled_Mabrouk_CV.pdf" download>Download CV</a>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
